@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capapresentacion;
+package presentacion;
 
 /**
  *
  * @author ERICK GALLARDO
  */
-public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
+public class JIFBuscarFactura extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JIFBuscarEmpleado
+     * Creates new form JIFBuscarFactura
      */
-    public JIFBuscarEmpleado() {
+    public JIFBuscarFactura() {
         initComponents();
     }
 
@@ -51,7 +51,7 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
-        jLabel1.setText("Busqueda de Empleado");
+        jLabel1.setText("Busqueda de Factura");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
