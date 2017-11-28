@@ -67,8 +67,6 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Sexo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setText("Nuevo");
