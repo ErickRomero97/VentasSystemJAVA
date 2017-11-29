@@ -15,25 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class JIFBuscarCliente extends javax.swing.JInternalFrame {
-    private String rtncliente = "0";
-
-    private JIFBuscarCliente(JFrame jFrame, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    public String getRtncliente() {
-        return rtncliente;
-    }
-
-    public void setRtncliente(String rtncliente) {
-        this.rtncliente = rtncliente;
-    }
     
     public JIFBuscarCliente() throws SQLException {
         initComponents();
-        //super(parent, modal);
-        //llenarTabla();
-        setDefaultCloseOperation(0);
-        //this.setLocationRelativeTo(null);
+        llenarTabla();
     }
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
@@ -42,7 +27,6 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
             temp.removeRow(0);
      }
     }
-    
     private void llenarTabla() throws SQLException 
     {
         limpiarTabla();
@@ -54,7 +38,7 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((CLClientes) -> {
-           Object [] fila = new Object [5];
+           Object [] fila = new Object [6];
            fila[0] = CLClientes.getRtnCliente();
             fila[1] = CLClientes.getNombre();
             fila[2] = CLClientes.getApellido();
@@ -64,7 +48,7 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
             return fila;
         }).forEachOrdered((fila) -> {
             tabla.addRow(fila);
-        });    
+        });  
     }
 
     /**
@@ -97,11 +81,6 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        jTbMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTbMostrarMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTbMostrar);
@@ -175,68 +154,20 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         try {
             llenarTabla();
         } catch (SQLException ex) {
-            Logger.getLogger(JIFBuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
+     public static void main(String args[]) {
 
-    private void jTbMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMouseClicked
-        if(evt.getClickCount() == 2){
-            try {
-                filaSeleccionada();
-            } catch (SQLException ex) {
+
+        java.awt.EventQueue.invokeLater(() -> {
+            try{
+                new JIFBuscarCliente().setVisible(true);
+            }catch (SQLException ex) {
                 Logger.getLogger(JIFBuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-    }//GEN-LAST:event_jTbMostrarMouseClicked
-     private void filaSeleccionada() throws SQLException
-    {
-        if (this.jTbMostrar.getSelectedRow() != -1)
-        {     
-            rtncliente = String.valueOf(this.jTbMostrar.getValueAt(this.jTbMostrar.getSelectedRow(), 0));
-            this.dispose();
-        }
-    }
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JIFBuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JIFBuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JIFBuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JIFBuscarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JIFBuscarCliente dialog;
-                /*try {
-                    dialog = new JIFBuscarCliente(new javax.swing.JFrame(), true);
-                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(JIFBuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
