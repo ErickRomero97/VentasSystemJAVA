@@ -8,11 +8,6 @@ package presentacion;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- *
- * @author ERICK GALLARDO
- */
 public class JFraMDI extends javax.swing.JFrame {
 
     /**
@@ -32,12 +27,22 @@ public class JFraMDI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem6 = new javax.swing.JCheckBoxMenuItem();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jCheckBoxMenuItem3.setSelected(true);
+        jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
+
+        jCheckBoxMenuItem6.setSelected(true);
+        jCheckBoxMenuItem6.setText("jCheckBoxMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +76,24 @@ public class JFraMDI extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jCheckBoxMenuItem2);
+
+        jCheckBoxMenuItem7.setSelected(true);
+        jCheckBoxMenuItem7.setText("Empleado");
+        jCheckBoxMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jCheckBoxMenuItem7);
+
+        jCheckBoxMenuItem8.setSelected(true);
+        jCheckBoxMenuItem8.setText("BusquedaEmpleado");
+        jCheckBoxMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jCheckBoxMenuItem8);
 
         jMenuBar1.add(jMenu1);
 
@@ -116,6 +139,28 @@ public class JFraMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
+    private void jCheckBoxMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem7ActionPerformed
+        JIFEmpleado frm;
+        try {
+            frm = new JIFEmpleado();
+            jDesktopPane1.add(frm);
+            frm.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCheckBoxMenuItem7ActionPerformed
+
+    private void jCheckBoxMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem8ActionPerformed
+        JIFBuscarEmpleado frm;
+        try {
+            frm = new JIFBuscarEmpleado();
+            jDesktopPane1.add(frm);
+            frm.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCheckBoxMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -154,6 +199,10 @@ public class JFraMDI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

@@ -1,21 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
-
-/**
- *
- * @author ERICK GALLARDO
- */
+import dao.EmpleadoDao;
+import logica.EmpleadoLogica;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFBuscarEmpleado
      */
-    public JIFBuscarEmpleado() {
+    public JIFBuscarEmpleado() throws SQLException {
         initComponents();
+        llenarTabla();
+    }
+     private void limpiarTabla(){
+        DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
+
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+     }
+    }
+    private void llenarTabla() throws SQLException 
+    {
+        limpiarTabla();
+        
+        EmpleadoDao dao = new EmpleadoDao();
+        
+        List<EmpleadoLogica> miLista = dao.getLista(this.jTFFiltro.getText());
+        
+        DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
+        
+        miLista.stream().map((cl) -> {
+           Object [] fila = new Object [6];
+           fila[0] = cl.getIdempleado();
+            fila[1] = cl.getNombre();
+            fila[2] = cl.getApellido();
+            fila[3] = cl.getTelefono();
+            fila[4] = cl.getDireccion();
+            fila[5] = cl.getIdSSexo();
+            return fila;
+        }).forEachOrdered((fila) -> {
+            tabla.addRow(fila);
+        });  
     }
 
     /**
@@ -28,24 +56,35 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jTbMostrar = new javax.swing.JTable();
+        jTFFiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CodEmpleado", "Nombre", "Apellido", "Telefono", "Dirección", "Sexo"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTbMostrar);
+
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Buscar:");
 
@@ -81,11 +120,11 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -97,7 +136,7 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -106,13 +145,33 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTFFiltroKeyReleased
+    public static void main(String args[]) {
+
+
+        java.awt.EventQueue.invokeLater(() -> {
+            try{
+                new JIFBuscarEmpleado().setVisible(true);
+            }catch (SQLException ex) {
+                Logger.getLogger(JIFBuscarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFFiltro;
+    private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 }
