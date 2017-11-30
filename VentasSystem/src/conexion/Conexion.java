@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
      public static Connection conectar(){
+         //Creación de la Conexión con el Servidor ubicado en MySQL.
         try{
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/ventasystem","root","TITO141397");

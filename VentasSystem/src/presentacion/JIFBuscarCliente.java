@@ -60,6 +60,8 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
