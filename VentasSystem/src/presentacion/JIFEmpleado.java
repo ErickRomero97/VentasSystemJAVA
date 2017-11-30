@@ -35,6 +35,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         this.jTFApellido.setEnabled(valor);
         this.jTFTelefono.setEnabled(valor);
         this.jTFDireccion.setEnabled(valor);
+        this.jCbosexo.setEnabled(valor);
     }
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 

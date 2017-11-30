@@ -33,6 +33,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         this.jTFApellido.setEnabled(valor);
         this.jTFTelefono.setEnabled(valor);
         this.jTFDireccion.setEnabled(valor);
+        this.jCbosexo.setEnabled(valor);
     }
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
@@ -406,6 +407,11 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         });
 
         jBtnEditar.setText("editar");
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEditarActionPerformed(evt);
+            }
+        });
 
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -530,6 +536,10 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         limpiar();
         habilitarBotones(false,true,false,true, true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        lineaSeleccionada();
+    }//GEN-LAST:event_jBtnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

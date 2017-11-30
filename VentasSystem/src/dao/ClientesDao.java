@@ -19,8 +19,7 @@ public class ClientesDao {
     }
     
     public void insertarCliente(ClientesLogica c1) throws SQLException{
-        String sql = "Insert into cliente (rtncliente, nombre, apellido, telefono, direccion, idsexo)"
-        + "values (?,?,?,?,?,?)";
+        String sql = "{ call sp_ingresarcliente(?,?,?,?,?,?)}";
         
         PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql);
         
@@ -35,8 +34,7 @@ public class ClientesDao {
     }
     
      public void editarCliente(ClientesLogica c1) throws SQLException{
-        String sql = "Update cliente set nombre = ?, apellido = ?, telefono = ?, direccion = ?, idsexo = ? "
-        + "Where rtncliente = ?";
+        String sql = "{ call sp_actualizarcliente(?,?,?,?,?,?)}";
         
         PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql);
                
@@ -51,7 +49,7 @@ public class ClientesDao {
     }
      
      public void eliminarCliente(ClientesLogica c1) throws SQLException{
-        String sql = "Delete From cliente where rtncliente = ?";
+        String sql = "{call sp_eliminarcliente(?)}";
         
         PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql);
         st.setString(1, c1.getRtnCliente());
@@ -61,18 +59,19 @@ public class ClientesDao {
      
      public List<ClientesLogica> getLista(String filtro) throws SQLException{
          String sql = "";
+         boolean determinar = false;
          if(filtro.length()==0){      
-             sql = "Select a.rtncliente,a.nombre, a.apellido, a.telefono, a.direccion,s.sexo "
-                     + "from cliente a inner join sexo s on a.idsexo = s.idsexo ";
+             sql = "{call sp_listarcliente()}";
          }else{
-             String buscar = ""+filtro+"%";
-             sql = "Select a.rtncliente,a.nombre, a.apellido, a.telefono, a.direccion,s.sexo "
-                     + "from cliente a inner join sexo s on a.idsexo = s.idsexo where a.nombre Like "+'"'+buscar+'"'+" or a.rtncliente Like "+'"'+buscar+'"';
-             
+             sql = "{call sp_buscarcliente1(?)}";
+             determinar = true;
+               
          }
          List<ClientesLogica> miLista;
          try(PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql)){
-             
+             if(determinar == true){
+                 st.setString(1, filtro);
+             } 
             ResultSet rs;
             rs = st.executeQuery();
             miLista = (List<ClientesLogica>) new ArrayList<ClientesLogica>();
