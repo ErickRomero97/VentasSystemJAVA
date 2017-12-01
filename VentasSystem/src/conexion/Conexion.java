@@ -12,7 +12,7 @@ public class Conexion {
          //Creación de la Conexión con el Servidor ubicado en MySQL.
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/ventasystem","root","erickg97");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/ventasystem","root","");
         }catch(ClassNotFoundException e){
             JOptionPane.showMessageDialog(null,e.getMessage());
             return null;
