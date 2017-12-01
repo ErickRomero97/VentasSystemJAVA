@@ -5,9 +5,13 @@
  */
 package presentacion;
 
+import java.awt.Dimension;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 public class JFraMDI extends javax.swing.JFrame {
 
     /**
@@ -16,8 +20,20 @@ public class JFraMDI extends javax.swing.JFrame {
     public JFraMDI() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        Image img = null;
+        
+        int a, b;
+        a = this.jLblMenu.getWidth();
+        b = this.jLblMenu.getHeight();
+        
+        ImageIcon verde = new ImageIcon("src/imagenes/Verde.png");
+        Icon icono = new ImageIcon(verde.getImage().getScaledInstance(a, b, Image.SCALE_DEFAULT));
+        jLblMenu.setIcon(icono);
+        repaint();
+        
     }
 
+    public boolean n = true;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +46,23 @@ public class JFraMDI extends javax.swing.JFrame {
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem6 = new javax.swing.JCheckBoxMenuItem();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLblMenu = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
@@ -46,18 +72,57 @@ public class JFraMDI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(56, 800));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+
+        jLblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLblMenuMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+
+        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLblMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLblMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jLblMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Busquedas");
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Clientes");
@@ -95,10 +160,71 @@ public class JFraMDI extends javax.swing.JFrame {
         });
         jMenu1.add(jCheckBoxMenuItem8);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem1.setText("Buscar Factura");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItem2.setText("Producto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Buscar Producto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Buscar Usuario");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Buscar Proveedor");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem6.setText("Usuario");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem7.setText("Proveedor");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
+        jMenuItem8.setText("Factura");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -122,6 +248,9 @@ public class JFraMDI extends javax.swing.JFrame {
             frm = new JIFCliente();
             jDesktopPane1.add(frm);
             frm.show();
+            Dimension dim = jDesktopPane1.getSize();
+            Dimension dimf = frm.getSize();
+            frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
         } catch (SQLException ex) {
             Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,9 +263,13 @@ public class JFraMDI extends javax.swing.JFrame {
             frm = new JIFBuscarCliente();
             jDesktopPane1.add(frm);
             frm.show();
+            Dimension dim = jDesktopPane1.getSize();
+            Dimension dimf = frm.getSize();
+            frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
         } catch (SQLException ex) {
             Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
     private void jCheckBoxMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem7ActionPerformed
@@ -145,6 +278,9 @@ public class JFraMDI extends javax.swing.JFrame {
             frm = new JIFEmpleado();
             jDesktopPane1.add(frm);
             frm.show();
+            Dimension dim = jDesktopPane1.getSize();
+            Dimension dimf = frm.getSize();
+            frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
         } catch (SQLException ex) {
             Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,10 +292,121 @@ public class JFraMDI extends javax.swing.JFrame {
             frm = new JIFBuscarEmpleado();
             jDesktopPane1.add(frm);
             frm.show();
+            Dimension dim = jDesktopPane1.getSize();
+            Dimension dimf = frm.getSize();
+            frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
         } catch (SQLException ex) {
             Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jCheckBoxMenuItem8ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JIFBuscarFactura frm;
+        frm = new JIFBuscarFactura();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jLblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLblMenuMouseClicked
+        Image img = null;
+        
+        int a, b;
+        a = this.jLblMenu.getWidth();
+        b = this.jLblMenu.getHeight();
+        
+        if(n==true){
+            jPanel1.setSize(56, 800);
+            n = false;
+            
+            ImageIcon azul = new ImageIcon("src/imagenes/Azul.png");
+            Icon icono = new ImageIcon(azul.getImage().getScaledInstance(a, b, Image.SCALE_DEFAULT));
+            jLblMenu.setIcon(icono);
+            repaint();
+        }else if(n==false){
+            jPanel1.setSize(1, 1);
+            n=true;
+            
+            ImageIcon azul = new ImageIcon("src/imagenes/Verde.png");
+            Icon icono = new ImageIcon(azul.getImage().getScaledInstance(a, b, Image.SCALE_DEFAULT));
+            jLblMenu.setIcon(icono);
+            repaint();
+        }
+        
+        
+    }//GEN-LAST:event_jLblMenuMouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JIFProducto frm;
+        frm = new JIFProducto();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JIFBuscarProducto frm;
+        frm = new JIFBuscarProducto();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        JIFBuscarUsuario frm;
+        frm = new JIFBuscarUsuario();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        JIFBuscarProveedor frm;
+        frm = new JIFBuscarProveedor();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        JIFUsuario frm;
+        frm = new JIFUsuario();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JIFProveedor frm;
+        frm = new JIFProveedor();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        JIFFactura frm;
+        frm = new JIFFactura();
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +444,7 @@ public class JFraMDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
@@ -204,8 +452,17 @@ public class JFraMDI extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLblMenu;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
