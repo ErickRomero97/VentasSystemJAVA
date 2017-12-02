@@ -14,11 +14,13 @@ import javax.swing.JOptionPane;
  * @author Walter
  */
 public class FacturaDao {
-    private final Connection con;
     
+    //Instansación de la Conexión con el Servidor.
+    private final Connection con;
     public FacturaDao() throws SQLException{
         this.con = Conexion.conectar();
     }
+    
     //Declaracion del Metodo de Insercion de la Relación Factura
     public void insertarFactura(FacturaLogica c1) throws SQLException{
         String sql = "{call sp_ingresarfactura(?,?,?,?}";
@@ -66,16 +68,12 @@ public class FacturaDao {
     public int obtenerCodFactura(FacturaLogica c1) throws SQLException{    
         int Id = 0;
         try{
-            
+            //Declaración del Procedimiento Almacenado de Investigar Correlativo de la Relación Factura.
             String sql = "{call sp_investigarcorrelativo()}";
-           
             Statement ai = con.createStatement();
             ResultSet ia = ai.executeQuery(sql);
-            
             ia.first();
-            
             Id = ia.getInt("Cod");
-            
         }catch(java.sql.SQLException e){
             JOptionPane.showMessageDialog(null, "Error" + e);
         }
@@ -86,11 +84,11 @@ public class FacturaDao {
     public List<FacturaLogica> getLista(String filtro) throws SQLException{
          String sql;
          boolean determinar = false;
-         if(filtro.length()==0){      
+         if(filtro.length()==0){  
+             //Declaración del Procedimiento Almacenado Mostrar de la Relación Factura.
              sql = "{call sp_mostrarfactura()}";
-             
          }else{
-             
+             //Declaración del Procedimiento Almacenado Mostrar con Busqueda de la Relación Factura.
              sql = "{call sp_buscarfactura(?)}";
              determinar = true;
              
@@ -117,33 +115,4 @@ public class FacturaDao {
         } 
          return miLista;
     }
-      
-    public List<FacturaLogica> listarDetalle(Integer codigo) throws SQLException{
-         String sql;
-         boolean determinar = true;
-         sql = "{call sp_mostrardetallefactura(?)}";
-         
-         List<FacturaLogica> miLista;
-         try(PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql)){
-            if(determinar == true){
-                 st.setInt(1, codigo);
-             } 
-            ResultSet rs;
-            rs = st.executeQuery();
-            miLista = (List<FacturaLogica>) new ArrayList<FacturaLogica>();
-            
-            while(rs.next()){
-                FacturaLogica c1 = new FacturaLogica();
-                c1.setIdFactura(rs.getInt("idfactura"));
-                c1.setIdProducto(rs.getInt("idproducto"));
-                c1.setNombreProducto(rs.getString("nombreproducto"));
-                c1.setCantidad(rs.getDouble("cantidad"));
-                c1.setCantidad(rs.getDouble("precioventa"));
-                miLista.add(c1);
-            }rs.close();
-        } 
-         return miLista;
-    }
-     
-    
 }

@@ -63,6 +63,7 @@ public class JFraMDI extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
@@ -92,6 +93,11 @@ public class JFraMDI extends javax.swing.JFrame {
         });
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLblMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -105,11 +111,11 @@ public class JFraMDI extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLblMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 354, Short.MAX_VALUE))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +230,15 @@ public class JFraMDI extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem8);
 
+        jCheckBoxMenuItem4.setSelected(true);
+        jCheckBoxMenuItem4.setText("Detalle Factura");
+        jCheckBoxMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jCheckBoxMenuItem4);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -301,8 +316,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem8ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JIFBuscarFactura frm;
-        frm = new JIFBuscarFactura();
+        JIFBuscarFactura frm = null;
+        try {
+            frm = new JIFBuscarFactura();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
@@ -399,14 +418,36 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        JIFFactura frm;
-        frm = new JIFFactura();
+        JIFFactura frm = null;
+        try {
+            frm = new JIFFactura();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
         Dimension dimf = frm.getSize();
         frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBoxMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem4ActionPerformed
+         JIFDetalleFactura frm = null;
+        try {
+            frm = new JIFDetalleFactura();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jDesktopPane1.add(frm);
+        frm.show();
+        Dimension dim = jDesktopPane1.getSize();
+        Dimension dimf = frm.getSize();
+        frm.setLocation((dim.width - dimf.width)/2, (dim.height - dimf.height)/2);
+    }//GEN-LAST:event_jCheckBoxMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -448,6 +489,7 @@ public class JFraMDI extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;

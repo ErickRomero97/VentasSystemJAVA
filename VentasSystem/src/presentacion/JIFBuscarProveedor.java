@@ -70,7 +70,7 @@ public class JIFBuscarProveedor extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 340, 310));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 340));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -1,10 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
-
+import dao.DetalleDao;
+import logica.DetalleLogica;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Walter
@@ -14,8 +15,9 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
     /**
      * Creates new form JIFDetalleFactura
      */
-    public JIFDetalleFactura() {
+    public JIFDetalleFactura() throws SQLException {
         initComponents();
+        llenarTabla();
     }
 
     /**
@@ -29,21 +31,23 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
-        jTFFiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jTFFiltro = new javax.swing.JTextField();
+
+        setClosable(true);
 
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CodCliente", "Nombre", "Apellido", "Telefono", "Dirección", "Sexo"
+                "CodFactura", "CodProducto", "Nombre Producto", "Cantidad", "Precio Venta"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -51,12 +55,6 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTbMostrar);
-
-        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFFiltroKeyReleased(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -83,6 +81,12 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,8 +98,8 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -103,26 +107,65 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Evento de la Caja de Texto Filtro.
     private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
-        try {
+       try {
             llenarTabla();
         } catch (SQLException ex) {
-            Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFDetalleFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
+    
+    //Metodo de Limpieza de la Tabla de Datos.
+    private void limpiarTabla(){
+        DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+        }
+    }
+    
+    //Metodo de llenado de la Tabla de Datos.
+    private void llenarTabla() throws SQLException {
+        limpiarTabla();
+        DetalleDao dao = new DetalleDao();
+        List<DetalleLogica> miLista = dao.getLista(this.jTFFiltro.getText());
+        DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
+        miLista.stream().map((DetalleLogica) -> {
+           Object [] fila = new Object [5];
+           fila[0] = DetalleLogica.getIdFactura();
+            fila[1] = DetalleLogica.getIdProducto();
+            fila[2] = DetalleLogica.getNombreProducto();
+            fila[3] = DetalleLogica.getCantidad();
+            fila[4] = DetalleLogica.getPrecio();
+            return fila;
+        }).forEachOrdered((fila) -> {
+            tabla.addRow(fila);
+        });  
+    }
+    
+    //Metodo principal Main.
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            try{
+                new JIFDetalleFactura().setVisible(true);
+            }catch (SQLException ex) {
+                Logger.getLogger(JIFDetalleFactura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;

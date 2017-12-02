@@ -15,15 +15,18 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
         initComponents();
         llenarTabla();
     }
-     private void limpiarTabla(){
+    
+    //Metodo de limpieza de la Tabla de Datos.
+    private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
         while (temp.getRowCount() > 0) {
             temp.removeRow(0);
-     }
+        }
     }
-    private void llenarTabla() throws SQLException 
-    {
+    
+    //Metodo de llenado de la Tabla de Datos.
+    private void llenarTabla() throws SQLException{
         limpiarTabla();
         
         EmpleadoDao dao = new EmpleadoDao();
@@ -114,7 +117,8 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Evento de la Caja de Texto Filtro.
     private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
         try {
             llenarTabla();
@@ -122,9 +126,9 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
+    
+    //Metodo principal Main.
     public static void main(String args[]) {
-
-
         java.awt.EventQueue.invokeLater(() -> {
             try{
                 new JIFBuscarEmpleado().setVisible(true);

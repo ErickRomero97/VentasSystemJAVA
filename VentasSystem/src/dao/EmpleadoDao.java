@@ -17,6 +17,7 @@ public class EmpleadoDao {
     public EmpleadoDao() throws SQLException{
         this.con = Conexion.conectar();
     }
+    
     //Declaración del Metodo de Inserción de Datos en la Relación empleado
     public void insertar(EmpleadoLogica c1) throws SQLException{
         //Declaración del Procedimiento Almacenado de Inserción de Datos en la Relación empleado
@@ -47,13 +48,13 @@ public class EmpleadoDao {
     
     //Declaración del Metodo de Lista de Datos en la Relación empleado
     public List<EmpleadoLogica> getLista(String filtro) throws SQLException{
-         String sql = "";
+         String sql ;
          boolean determinar = false;
          if(filtro.length()==0){
-             //Declaración del Procedimiento Almacenado de Mostrar Datos dn la Relación empleado
+             //Declaración del Procedimiento Almacenado de Mostrar Datos dn la Relación Empleado
              sql = "{call sp_listarempleado()} ";
          }else{
-             //Declaración del Procedimiento Almacenado de Busqueda de Datos en la Relación empleado
+             //Declaración del Procedimiento Almacenado de Busqueda de Datos en la Relación Empleado
              sql = "{call sp_buscarempleado(?)}";
              determinar = true;
          }

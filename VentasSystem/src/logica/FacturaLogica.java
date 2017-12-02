@@ -5,7 +5,8 @@ package logica;
  * @author Walter
  */
 public class FacturaLogica {
-    //Declaración de los Miembres get and set de la Clase Factura Logica
+    
+    //Declaración de los Miembres get and set de la Relación Factura.
     private String fechaFactura, rtnCliente,tipoSFactura;
     private int idFactura,idProducto,idTipoFactura,idUsuario;
     private double precio,cantidad;

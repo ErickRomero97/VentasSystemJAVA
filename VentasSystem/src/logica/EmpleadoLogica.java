@@ -5,7 +5,8 @@ package logica;
  * @author Walter
  */
 public class EmpleadoLogica {
-    //Declaración de los Miembros get and set para los Datos de la Relación empleado
+    
+    //Declaración de los Miembros get and set para los Datos de la Relación Empleado.
     private String idempleado, nombre, apellido, direccion, telefono;
     private int idSexo;
      private String idSSexo;

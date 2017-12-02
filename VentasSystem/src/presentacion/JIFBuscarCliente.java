@@ -13,15 +13,22 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         initComponents();
         llenarTabla();
     }
+
+    JIFBuscarCliente(JIFCliente f, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    //Metodo de Limpiar la Tabla de Datos.
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
         while (temp.getRowCount() > 0) {
             temp.removeRow(0);
-     }
+        }
     }
-    private void llenarTabla() throws SQLException 
-    {
+    
+    //Metodo de llenar la Tabla de Datos.
+    private void llenarTabla() throws SQLException{
         limpiarTabla();
         
         ClientesDao dao = new ClientesDao();
@@ -116,7 +123,8 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Evento de la jTextField.
     private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
         try {
             llenarTabla();
@@ -146,4 +154,8 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFFiltro;
     private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
+
+    String getRtnCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

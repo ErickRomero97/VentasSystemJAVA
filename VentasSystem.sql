@@ -10,14 +10,19 @@ insert into proveedor(idproveedor,nombre,apellido,direccion,telefono,idsexo)
 values('1709-1995-00000','Roger','Martinez','Nacaome','9933-1234',2);
 
 select * from producto;
+
 insert into producto(nombreproducto,unidadexistencia,existenciaminima,preciocompra,precioventa,idproveedor)
-values('Balde',20,5,100,130,'1709-1995-00000');
+values('Manteca',20,5,100,130,'1709-1995-00000');
+
 select * from usuario;
 insert into usuario(nombre,contraseña,estado,idempleado)
 values ('any','1234',1,'1709-1996-00038');
+
 select * from factura;
+
 insert into factura(fechafactura,idtipofactura,rtncliente,idusuario)
-values ('2016-12-12',1,'1709-1997-011530',1);
+values ('2016-12-15',2,'1709-1995-000380',1);
+
 select * from empleado;
 
 
@@ -210,18 +215,46 @@ create procedure sp_buscarfactura(in pfiltro varchar(50))
 		Select  F.idfactura,C.rtncliente, C.nombre,C.apellido, TF.tipofactura, F.fechafactura 
              from factura F inner join cliente C on C.rtncliente = F.rtncliente 
 							inner join tipofactura TF on TF.idtipofactura = F.idtipofactura 
-        where C.nombre Like concat('%',pfiltro,'%')  or TP.tipofactura Like concat('%',pfiltro,'%') ; 
+        where C.rtncliente Like concat('%',pfiltro,'%') or C.nombre Like concat('%',pfiltro,'%')  or TF.tipofactura Like concat('%',pfiltro,'%') ; 
     end $$
 delimiter ;
 
 --Procedimiento de  Mostrar DetalleFactura
 delimiter $$
-create procedure sp_mostrardetallefactura(in pfiltro int)
+create procedure sp_mostrardetallefactura(in pfiltro varchar(50))
 	begin
 		Select  F.idfactura,p.idproducto,p.nombreproducto,df.cantidad,df.precioventa 
 		from factura F inner join detallefactura df on f.idfactura=df.idfactura
 					   inner join producto p on df.idproducto=p.idproducto
-		where F.idfactura Like concat('%',pfiltro,'%')  or p.idproducto Like concat('%',pfiltro,'%') ; 
+		where p.nombreproducto Like concat('%',pfiltro,'%') ;
+    end $$
+delimiter ;
+
+
+call sp_buscarfactura('Walter A.');
+call sp_mostrardetallefactura('Balde');
+
+--Procedimiento de  Mostrar DetalleFactura
+delimiter $$
+create procedure sp_detallefactura()
+	begin
+		Select  F.idfactura,p.idproducto,p.nombreproducto,df.cantidad,df.precioventa 
+		from factura F inner join detallefactura df on f.idfactura=df.idfactura
+					   inner join producto p on df.idproducto=p.idproducto;
+    end $$
+delimiter ;
+
+execute sp_detallefactura;
+
+select * from detallefactura;
+select * from producto;
+insert into detallefactura(idproducto,idfactura,cantidad,precioventa)
+values(2,2,22,22);
+--Procedimiento de  MostrarTipoFactura
+delimiter $$
+create procedure sp_mostrartipofactura()
+	begin
+		Select TipoFactura from tipofactura ;
     end $$
 delimiter ;
 

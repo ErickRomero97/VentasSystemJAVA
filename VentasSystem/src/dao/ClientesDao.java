@@ -12,11 +12,13 @@ import java.util.List;
  * @author Walter
  */
 public class ClientesDao {
+    
     //Instansiación de la Clase Conexión para poder Conectar con el Servidor
     private final Connection con;
     public ClientesDao() throws SQLException{
         this.con = Conexion.conectar();
     }
+    
     //Declaración de Metodo de Inserción de Datos en la Relación cliente
     public void insertarCliente(ClientesLogica c1) throws SQLException{
         //Declaración del Procedimiento Almacenado de Ingreso de Datos en la Relación cliente
@@ -30,6 +32,7 @@ public class ClientesDao {
         st.setInt(6, c1.getIdSexo());
         st.execute();
     }
+    
     //Declaración de Metodo de Actualización de Datos en la Relación cliente
     public void editarCliente(ClientesLogica c1) throws SQLException{
         //Declaración del Procedimiento Almacenado de Actualización de Datos en la Relación cliente
@@ -43,6 +46,7 @@ public class ClientesDao {
         st.setString(6, c1.getRtnCliente());
         st.execute();
     }
+    
     //Declaración de Metodo de Eliminación de Datos en la Relación cliente
     public void eliminarCliente(ClientesLogica c1) throws SQLException{
         //Declaración del Procedimiento Almacenado de Eliminación de Datos en la Relación cliente
@@ -51,9 +55,10 @@ public class ClientesDao {
         st.setString(1, c1.getRtnCliente());
         st.execute();
     }
+    
     //Metodo para Mostrar Datos dentro de la jTable
     public List<ClientesLogica> getLista(String filtro) throws SQLException{
-         String sql = "";
+         String sql;
          boolean determinar = false;
          if(filtro.length()==0){  
              //Declaración del Procedimiento Almacenado de Mostrar Datos en la Relación cliente

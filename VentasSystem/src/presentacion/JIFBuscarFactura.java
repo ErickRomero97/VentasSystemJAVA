@@ -1,23 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
-
-/**
- *
- * @author ERICK GALLARDO
- */
+import dao.FacturaDao;
+import logica.FacturaLogica;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 public class JIFBuscarFactura extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form JIFBuscarFactura
-     */
-    public JIFBuscarFactura() {
+    public JIFBuscarFactura() throws SQLException {
         initComponents();
+        llenarTabla();
     }
+    
+    //Metodo de Limpieza de la Tabla de Datos.
+    private void limpiarTabla(){
+        DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+        }
+    }
+    
+    //Metodo de llenado de la Tabla de Datos.
+    private void llenarTabla() throws SQLException{
+        limpiarTabla();
+        FacturaDao dao = new FacturaDao();
+        List<FacturaLogica> miLista = dao.getLista(this.jTFFiltro.getText());
+        DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
+        miLista.stream().map((FacturaLogica) -> {
+           Object [] fila = new Object [6];
+           fila[0] = FacturaLogica.getIdFactura();
+            fila[1] = FacturaLogica.getRtnCliente();
+            fila[2] = FacturaLogica.getNombreCliente();
+            fila[3] = FacturaLogica.getApellidoCliente();
+            fila[4] = FacturaLogica.getTipoSFactura();
+            fila[5] = FacturaLogica.getFechaFactura();
+            return fila;
+        }).forEachOrdered((fila) -> {
+            tabla.addRow(fila);
+        });  
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,31 +51,43 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jTbMostrar = new javax.swing.JTable();
+        jTFFiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CodFactura", "RTN Cliente", "Nombre", "Apellido", "Tipo Factura", "Fecha Factura"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTbMostrar);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 670, 150));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 288, -1));
+
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 288, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -74,7 +109,26 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Evento de la jTextField
+    private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
+         try {
+            llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTFFiltroKeyReleased
+    
+    //Metodo principal Main.
+    public static void main(String args[]){
+        java.awt.EventQueue.invokeLater(() -> {
+            try{
+                new JIFBuscarCliente().setVisible(true);
+            }catch (SQLException ex) {
+                Logger.getLogger(JIFBuscarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -83,7 +137,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFFiltro;
+    private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 }

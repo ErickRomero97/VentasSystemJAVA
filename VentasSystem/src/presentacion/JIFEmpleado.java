@@ -21,6 +21,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         habilitarBotones(true,false,false,false, false);
         llenarComboBoxSexo();
     }
+    
+    //Metodo de Habilitación de Botones.
     private void habilitarBotones( boolean nuevo, boolean guardar, boolean actualizar, boolean cancelar, boolean valor){
         this.jBtnNuevo.setEnabled(nuevo);
         this.jBtnGuardar.setEnabled(guardar);
@@ -29,24 +31,27 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         habilitarTexField(valor);
     }
     
+    //Metodo de Habilitación de las Cajas de Texto.
     private void habilitarTexField(boolean valor){
-        this.jTFCodigo.setEnabled(valor);
+        this.jFTFCodigo.setEnabled(valor);
         this.jTFNombre.setEnabled(valor);
         this.jTFApellido.setEnabled(valor);
-        this.jTFTelefono.setEnabled(valor);
+        this.jFTFTelefono.setEnabled(valor);
         this.jTFDireccion.setEnabled(valor);
         this.jCbosexo.setEnabled(valor);
     }
+    
+    //Metodo de limpieza de la Tabla de Datos.
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
         while (temp.getRowCount() > 0) {
             temp.removeRow(0);
-     }
+        }
     }
     
-    private void llenarTabla() throws SQLException 
-    {
+    //Metodo del llenado de Datos de la Tabla de Datos.
+    private void llenarTabla() throws SQLException{
         limpiarTabla();
         
         EmpleadoDao dao = new EmpleadoDao();
@@ -69,35 +74,40 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         });    
     }
     
+    //Metodo de Linea Seleccionada dentro de la Tabla de Datos.
     private void lineaSeleccionada(){
         if (this.jTbMostrar.getSelectedRow() != -1) {
             //Habilito los controles para que se pueda hacer una accion.
                 this.jTFFiltro.setText("");
                 habilitarBotones(false,false,true,true,true);
-                this.jTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
+                this.jFTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
                 this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
                 this.jTFApellido.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
-                this.jTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
+                this.jFTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
                 this.jTFDireccion.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
                 this.jCbosexo.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 5)));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione el Empleado a Editar");
         }
     }
-    private void limpiar()
-    {
-        this.jTFCodigo.setText("");
+    
+    //Metodo de Limpieza de Datos dentro de las Cajas de Texto
+    private void limpiar(){
+        this.jFTFCodigo.setText("");
         this.jTFNombre.setText("");
         this.jTFApellido.setText("");
-        this.jTFTelefono.setText("");
+        this.jFTFTelefono.setText("");
         this.jTFDireccion.setText("");
+        this.jCbosexo.setSelectedIndex(0);
     }
+    
+    //Metodo de Guardar datos del Empleado.
     private void guardar(){
         EmpleadoLogica cl = new EmpleadoLogica();
-        cl.setIdempleado(this.jTFCodigo.getText());
+        cl.setIdempleado(this.jFTFCodigo.getText());
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
-        cl.setTelefono(this.jTFTelefono.getText());
+        cl.setTelefono(this.jFTFTelefono.getText());
         cl.setDireccion(this.jTFDireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
         
@@ -109,6 +119,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al Almacenar el Empleado " + e);
         }
     }
+    
+    //Metodo de llenado del ComboBox de Sexo.
     private void llenarComboBoxSexo(){
         String consulta = "{call sp_listarsexo()}";
         try{
@@ -121,13 +133,14 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,ex.getMessage());
         }
     }
-    private void editar()
-    {
+    
+    //Metodo de Editar Datos del Empleado.
+    private void editar(){
         EmpleadoLogica cl = new EmpleadoLogica();
-        cl.setIdempleado(this.jTFCodigo.getText());
+        cl.setIdempleado(this.jFTFCodigo.getText());
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
-        cl.setTelefono(this.jTFTelefono.getText());
+        cl.setTelefono(this.jFTFTelefono.getText());
         cl.setDireccion(this.jTFDireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
         try{
@@ -139,13 +152,12 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         }
     }
     
-    private boolean verificarDatos() throws SQLException
-    {
+    //Metodo de Verificacion de Datos de las Cajas de Texto.
+    private boolean verificarDatos() throws SQLException{
         boolean valor = true;
-        
-        if (this.jTFCodigo.getText().length()==0){
+        if (this.jFTFCodigo.getText().length()==0){
             JOptionPane.showMessageDialog(null,"Ingrese el Codigo del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFCodigo.requestFocus();
+            this.jFTFCodigo.requestFocus();
             valor = false;
         }else if ((this.jTFNombre.getText().length())== 0 ){
             JOptionPane.showMessageDialog(null,"Ingrese el Nombre del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
@@ -155,9 +167,9 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Ingrese el Apellido del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jTFApellido.requestFocus();
             valor = false;
-        }else if (this.jTFTelefono.getText().length()== 0){
+        }else if (this.jFTFTelefono.getText().length()== 0){
             JOptionPane.showMessageDialog(null,"Ingrese el Telefono del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFTelefono.requestFocus();
+            this.jFTFTelefono.requestFocus();
             valor = false;
         }else if ((this.jTFDireccion.getText().length())== 0){
             JOptionPane.showMessageDialog(null,"Ingrese la Direccion del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
@@ -170,6 +182,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         }
          return valor;
     }
+    
+    //Metodo principal Main.
     public static void main(String args[]) {
 
 
@@ -193,13 +207,11 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTFCodigo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTFNombre = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTFApellido = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTFTelefono = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jCbosexo = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
@@ -209,10 +221,11 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         jBtnGuardar = new javax.swing.JButton();
         jBtnActualizar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
+        jFTFCodigo = new javax.swing.JFormattedTextField();
+        jFTFTelefono = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTFFiltro = new javax.swing.JTextField();
-        jBtnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
 
@@ -292,6 +305,18 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        try {
+            jFTFCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFTFTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -307,23 +332,24 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCbosexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTFApellido)))
+                                .addComponent(jTFApellido))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCbosexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(2, 2, 2))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(39, Short.MAX_VALUE))))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
@@ -334,8 +360,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jFTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -344,15 +370,14 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel1)))
+                            .addComponent(jLabel1)
+                            .addComponent(jFTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCbosexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jCbosexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
@@ -372,13 +397,6 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             }
         });
 
-        jBtnEditar.setText("editar");
-        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarActionPerformed(evt);
-            }
-        });
-
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -395,6 +413,11 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTbMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTbMostrarMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbMostrar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -406,8 +429,6 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(34, 34, 34)
                 .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jBtnEditar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
@@ -416,8 +437,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnEditar))
+                    .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
         );
@@ -438,17 +458,20 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Metodo de Accion del Boton Nuevo.
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         limpiar();
+        jFTFCodigo.requestFocus();
         habilitarBotones(false,true,false,true, true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
-
+    
+    //Metodo de Accion del Boton Guardar.
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
         try{
             if(verificarDatos()== true)
@@ -464,7 +487,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jBtnGuardarActionPerformed
-
+    
+    //Metodo de Accion del Boton Actualizar.
     private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
         try{
             if(verificarDatos()== true)
@@ -480,12 +504,14 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jBtnActualizarActionPerformed
-
+    
+    //Metodo de Accion del Boton Cancelar.
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         limpiar();
         habilitarBotones(true,false,false,false, false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
-
+    
+    //Evento de la Caja de Texto Filtro.
     private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
         try {
             llenarTabla();
@@ -493,19 +519,22 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
-
-    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+    
+    //Evento de la Tabla de Datos.
+    private void jTbMostrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMousePressed
         lineaSeleccionada();
-    }//GEN-LAST:event_jBtnEditarActionPerformed
+        jFTFCodigo.enable(false);
+    }//GEN-LAST:event_jTbMostrarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
     private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
     private javax.swing.JComboBox<String> jCbosexo;
+    private javax.swing.JFormattedTextField jFTFCodigo;
+    private javax.swing.JFormattedTextField jFTFTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -518,11 +547,9 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
-    private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFDireccion;
     private javax.swing.JTextField jTFFiltro;
     private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFTelefono;
     private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 }

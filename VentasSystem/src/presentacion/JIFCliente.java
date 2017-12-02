@@ -19,6 +19,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         habilitarBotones(true,false,false,false, false);
         llenarComboBoxSexo();
     }
+    
+    //Metodo Habilitar Botones.
     private void habilitarBotones( boolean nuevo, boolean guardar, boolean actualizar, boolean cancelar, boolean valor){
         this.jBtnNuevo.setEnabled(nuevo);
         this.jBtnGuardar.setEnabled(guardar);
@@ -27,24 +29,27 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         habilitarTexField(valor);
     }
     
+    //Metodo Habilitar CAjas de Textos.
     private void habilitarTexField(boolean valor){
-        this.jTFCodigo.setEnabled(valor);
+        this.jFTFCodigo.setEnabled(valor);
         this.jTFNombre.setEnabled(valor);
         this.jTFApellido.setEnabled(valor);
-        this.jTFTelefono.setEnabled(valor);
+        this.jFTFTelefono.setEnabled(valor);
         this.jTFDireccion.setEnabled(valor);
         this.jCbosexo.setEnabled(valor);
     }
+    
+    //Metodo de Limpieza de la Tabla de Datos.
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
 
         while (temp.getRowCount() > 0) {
             temp.removeRow(0);
-     }
+        }
     }
     
-    private void llenarTabla() throws SQLException 
-    {
+    //Metodo de llenado de Tabla de Datos.
+    private void llenarTabla() throws SQLException{
         limpiarTabla();
         
         ClientesDao dao = new ClientesDao();
@@ -67,40 +72,42 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         });    
     }
     
+    //Metodo de la Linea Seleccionada dentro de la Tabla de Datos.
     private void lineaSeleccionada(){
         if (this.jTbMostrar.getSelectedRow() != -1) {
             //Habilito los controles para que se pueda hacer una accion.
                 this.jTFFiltro.setText("");
                 habilitarBotones(false,false,true,true,true);
-                this.jTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
+                this.jFTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
                 this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
                 this.jTFApellido.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
-                this.jTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
+                this.jFTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
                 this.jTFDireccion.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
                 this.jCbosexo.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 5)));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione el Cliente a Editar");
         }
     }
-    private void limpiar()
-    {
-        this.jTFCodigo.setText("");
+    
+    //Metodo de Limpieza de las Cajas de Texto.
+    private void limpiar(){
+        this.jFTFCodigo.setText("");
         this.jTFNombre.setText("");
         this.jTFApellido.setText("");
-        this.jTFTelefono.setText("");
+        this.jFTFTelefono.setText("");
         this.jTFDireccion.setText("");
+        this.jCbosexo.setSelectedIndex(0);
     }
+    
+    //Metodo de Guardar Nuevo Registro del Cliente.
     private void guardarCliente(){
-        
         ClientesLogica cl = new ClientesLogica();
-        
-        cl.setRtnCliente(this.jTFCodigo.getText());
+        cl.setRtnCliente(this.jFTFCodigo.getText());
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
-        cl.setTelefono(this.jTFTelefono.getText());
+        cl.setTelefono(this.jFTFTelefono.getText());
         cl.setDireccion(this.jTFDireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
-        
         try{
             ClientesDao dao = new ClientesDao();
             dao.insertarCliente(cl);
@@ -109,6 +116,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al Almacenar el Cliente " + e);
         }
     }
+    
+    //Metodo de LLenado de los Sexos de los Clientes.
     private void llenarComboBoxSexo(){
         String consulta = "call sp_listarsexo()";
         try{
@@ -121,16 +130,16 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,ex.getMessage());
         }
     }
-    private void editarCliente()
-    {
+    
+    //Metodo de Edición de los Datos de los Clientes.
+    private void editarCliente(){
         ClientesLogica cl = new ClientesLogica();
-        cl.setRtnCliente(this.jTFCodigo.getText());
+        cl.setRtnCliente(this.jFTFCodigo.getText());
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
-        cl.setTelefono(this.jTFTelefono.getText());
+        cl.setTelefono(this.jFTFTelefono.getText());
         cl.setDireccion(this.jTFDireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
-        
         try{
             ClientesDao dao = new ClientesDao();
             dao.editarCliente(cl);     
@@ -140,13 +149,12 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         }
     }
     
-    private boolean verificarDatos() throws SQLException
-    {
+    //Metodo de Verificación de los Datos dentro de las Cajas de Texto.
+    private boolean verificarDatos() throws SQLException{
         boolean valor = true;
-        
-        if (this.jTFCodigo.getText().length()==0){
+        if (this.jFTFCodigo.getText().length()==0){
             JOptionPane.showMessageDialog(null,"Ingrese el RTN del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFCodigo.requestFocus();
+            this.jFTFCodigo.requestFocus();
             valor = false;
         }else if ((this.jTFNombre.getText().length())== 0 ){
             JOptionPane.showMessageDialog(null,"Ingrese el Nombre del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
@@ -156,9 +164,9 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Ingrese el Apellido del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jTFApellido.requestFocus();
             valor = false;
-        }else if (this.jTFTelefono.getText().length()== 0){
+        }else if (this.jFTFTelefono.getText().length()== 0){
             JOptionPane.showMessageDialog(null,"Ingrese el Telefono del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFTelefono.requestFocus();
+            this.jFTFTelefono.requestFocus();
             valor = false;
         }else if ((this.jTFDireccion.getText().length())== 0){
             JOptionPane.showMessageDialog(null,"Ingrese la Direccion del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
@@ -171,9 +179,9 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         }
          return valor;
     }
+    
+    //Metodo principal Main.
     public static void main(String args[]) {
-
-
         java.awt.EventQueue.invokeLater(() -> {
             try{
                 new JIFCliente().setVisible(true);
@@ -182,8 +190,9 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             }
         });
     }
-    private void eliminar() throws SQLException
-    {
+    
+    //Metodo Eliminar los Datos del Cliente.
+    private void eliminar() throws SQLException{
         int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea Eliminar a este Cliente?", Conexion.nombreapp(), JOptionPane.YES_NO_OPTION);
         if (resp == JOptionPane.YES_OPTION)
         {
@@ -205,8 +214,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Datos eliminados correctamente", Conexion.nombreapp(), JOptionPane.INFORMATION_MESSAGE);
              limpiar();
-        }
-        
+        } 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,12 +236,12 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTFTelefono = new javax.swing.JTextField();
         jTFNombre = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jCbosexo = new javax.swing.JComboBox<>();
-        jTFCodigo = new javax.swing.JTextField();
         jBtnNuevo = new javax.swing.JButton();
+        jFTFTelefono = new javax.swing.JFormattedTextField();
+        jFTFCodigo = new javax.swing.JFormattedTextField();
         jBtnGuardar = new javax.swing.JButton();
         jBtnActualizar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
@@ -303,7 +311,6 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Dirección:");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, -1, -1));
-        getContentPane().add(jTFTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, 128, -1));
         getContentPane().add(jTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 128, -1));
 
         jLabel9.setText("Nombre:");
@@ -311,7 +318,6 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         jCbosexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         getContentPane().add(jCbosexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 170, 139, -1));
-        getContentPane().add(jTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 203, -1));
 
         jBtnNuevo.setText("Nuevo");
         jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -320,6 +326,20 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, -1, -1));
+
+        try {
+            jFTFTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jFTFTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, 130, -1));
+
+        try {
+            jFTFCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-######")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jFTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 210, -1));
 
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -367,7 +387,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Metodo de Accion del Boton Borrar
     private void jBtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBorrarActionPerformed
         try {
             eliminar();
@@ -375,7 +396,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnBorrarActionPerformed
-
+    
+    //Evento de la Caja de Texto Filtro.
     private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
         try {
             llenarTabla();
@@ -384,11 +406,13 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
 
+    //Metodo de Accion del Boton Cancelar.
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         limpiar();
         habilitarBotones(true,false,false,false, false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
-
+    
+    //Metodo de Accion del Boton Actualizar.
     private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
         try{
             if(verificarDatos()== true)
@@ -404,7 +428,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jBtnActualizarActionPerformed
-
+    
+    //Metodo de Accion del Boton Guardar
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
         try{
             if(verificarDatos()== true)
@@ -420,14 +445,18 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jBtnGuardarActionPerformed
-
+    
+    //Metodo de Accion del Boton Nuevo.
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         limpiar();
+        jFTFCodigo.requestFocus();
         habilitarBotones(false,true,false,true, true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
-
+    
+    //Metodo de Accion del Boton Editar.
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         lineaSeleccionada();
+        jFTFCodigo.enable(false);
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
 
@@ -439,6 +468,8 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
     private javax.swing.JComboBox<String> jCbosexo;
+    private javax.swing.JFormattedTextField jFTFCodigo;
+    private javax.swing.JFormattedTextField jFTFTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -452,11 +483,9 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
-    private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFDireccion;
     private javax.swing.JTextField jTFFiltro;
     private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFTelefono;
     private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 

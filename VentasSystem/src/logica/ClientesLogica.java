@@ -4,7 +4,7 @@ package logica;
  * @author Walter
  */
 public class ClientesLogica {
-    //Declaración de los Miembros get and set para los Datos de la Relación cliente
+    //Declaración de los Miembros get and set para los Datos de la Relación Cliente.
     private String rtnCliente, nombre, apellido, direccion, telefono;
     private int idSexo;
      private String idSSexo;
