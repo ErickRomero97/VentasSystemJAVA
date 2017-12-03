@@ -5,17 +5,56 @@
  */
 package presentacion;
 
+import dao.ProveedorDao;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import logica.ProveedorLogica;
+
 /**
  *
- * @author ERICK GALLARDO
+ * @author Miguel
  */
 public class JIFBuscarProveedor extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFBuscarProveedor
      */
-    public JIFBuscarProveedor() {
+    public JIFBuscarProveedor() throws SQLException {
         initComponents();
+        llenarTabla();
+    }
+    
+    //Funcion para limpiar la jTable de los datos.
+    private void limpiarTabla(){
+        DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProveedor.getModel(); //
+        
+        // Limpiar los datos de la tabla.
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+        }
+    }
+    
+    //Esta función sire para cargar el jTable de los datos de busqueda de proveedor
+    private void llenarTabla() throws SQLException{
+        limpiarTabla();
+        ProveedorDao dao = new ProveedorDao();
+        List<ProveedorLogica> miLista = dao.getListaBuscarProveedor(this.jTFFiltro.getText());
+        
+        DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProveedor.getModel(); 
+        
+        miLista.stream().map((c1) -> {
+            Object[] fila = new Object[4];
+            fila[0] = c1.getIdProveedor();
+            fila[1] = c1.getNombre();
+            fila[2] = c1.getTelefono();
+            fila[3] = c1.getDireccion();
+            return fila;
+        }).forEachOrdered((fila) -> {   
+            temp.addRow(fila);            
+        });
     }
 
     /**
@@ -27,63 +66,89 @@ public class JIFBuscarProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jTblDatosProveedor = new javax.swing.JTable();
+        jTFFiltro = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setClosable(true);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
-        jLabel2.setText("Buscar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 288, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblDatosProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IdProveedor", "Nombre Proveedor", "Telefono", "Direccion"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 610, 223));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTblDatosProveedor);
 
-        jLabel5.setFont(new java.awt.Font("Valken", 0, 24)); // NOI18N
-        jLabel5.setText("Busqueda proveedor");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 270, 30));
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Picture5.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 60));
+        jLabel3.setText("Filtro:");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Picture2.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 340, 310));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 360));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 629, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
+        // TODO add your handling code here:
+        //Esto al escribir convierte el texto a mayúscula.
+        this.jTFFiltro.setText(this.jTFFiltro.getText().toUpperCase());
+        //Aqui se actualizan los datos de acuerdo a lo que escribimos en el Textfield.
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFBuscarProveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTFFiltroKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFFiltro;
+    private javax.swing.JTable jTblDatosProveedor;
     // End of variables declaration//GEN-END:variables
 }

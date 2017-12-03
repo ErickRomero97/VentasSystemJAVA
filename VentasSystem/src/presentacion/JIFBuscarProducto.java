@@ -5,19 +5,60 @@
  */
 package presentacion;
 
+import dao.ProductoDao;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import logica.ProductoLogica;
+
 /**
  *
- * @author ERICK GALLARDO
+ * @author Miguel
  */
 public class JIFBuscarProducto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFBuscarProducto
      */
-    public JIFBuscarProducto() {
+    public JIFBuscarProducto() throws SQLException {
         initComponents();
+        llenarTabla();
     }
-
+    
+    //Esta funcion limpia la jTable
+    private void limpiarTabla(){      
+        DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProducto.getModel(); //
+        
+        // Limpiar los datos de la tabla.
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+        }
+    }
+    
+    //Esta funcion llena la jTable con los datos del producto
+    private void llenarTabla() throws SQLException{
+        limpiarTabla();
+        ProductoDao dao = new ProductoDao();
+        List<ProductoLogica> miLista = dao.getLista(this.jTFFiltro.getText());
+        
+        DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProducto.getModel(); 
+        
+        miLista.stream().map((c1) -> {
+            Object[] fila = new Object[7];
+            fila[0] = c1.getIdproducto();
+            fila[1] = c1.getNombreProducto();
+            fila[2] = c1.getUnidadExistencia();
+            fila[3] = c1.getPrecioCompra();
+            fila[4] = c1.getPrecioVenta();
+            fila[5] = c1.getProductoCol();
+            fila[6] = c1.getProveedor();
+            return fila;
+        }).forEachOrdered((fila) -> {   
+            temp.addRow(fila);            
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,63 +68,87 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jTblDatosProducto = new javax.swing.JTable();
+        jTFFiltro = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
-        jLabel1.setText("Buscar:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 237, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblDatosProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CodigoProducto", "NombreProducto", "UnidadExistencia", "PrecioCompra", "PrecioVenta", "ProductoCol", "Proveedor"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 108, 597, 196));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTblDatosProducto);
 
-        jLabel5.setFont(new java.awt.Font("Valken", 0, 24)); // NOI18N
-        jLabel5.setText("Busqueda Producto");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 270, 30));
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Picture5.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 600, 60));
+        jLabel1.setText("Buscar:");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Picture2.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, -10, 330, 310));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 310));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(118, 118, 118)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(113, 113, 113))
+                        .addComponent(jScrollPane1))
+                    .addContainerGap()))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Este evento actualiza la informacion de la jTable de acuerdo a lo que escribamos en el TextField
+    private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
+        this.jTFFiltro.setText(this.jTFFiltro.getText().toUpperCase());
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTFFiltroKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFFiltro;
+    private javax.swing.JTable jTblDatosProducto;
     // End of variables declaration//GEN-END:variables
 }

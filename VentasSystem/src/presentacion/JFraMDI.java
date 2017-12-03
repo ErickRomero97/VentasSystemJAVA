@@ -358,8 +358,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jLblMenuMouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JIFProducto frm;
-        frm = new JIFProducto();
+        JIFProducto frm = null;
+        try {
+            frm = new JIFProducto();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
@@ -368,8 +372,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        JIFBuscarProducto frm;
-        frm = new JIFBuscarProducto();
+        JIFBuscarProducto frm = null;
+        try {
+            frm = new JIFBuscarProducto();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
@@ -388,8 +396,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        JIFBuscarProveedor frm;
-        frm = new JIFBuscarProveedor();
+        JIFBuscarProveedor frm = null;
+        try {
+            frm = new JIFBuscarProveedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
@@ -408,8 +420,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        JIFProveedor frm;
-        frm = new JIFProveedor();
+        JIFProveedor frm = null;
+        try {
+            frm = new JIFProveedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
