@@ -4,20 +4,59 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+import dao.UsuarioDao;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import logica.UsuarioLogica;
 /**
  *
- * @author ERICK GALLARDO
+ * @author Nixon Sanchez
  */
 public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form JIFBuscarUsuario
+     * @throws java.sql.SQLException
      */
-    public JIFBuscarUsuario() {
+    public JIFBuscarUsuario() throws SQLException{
         initComponents();
     }
 
+    
+        //Funcion para limpiar la jTable de los datos.
+    private void limpiarTabla(){
+        DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); //
+        // Limpiar los datos de la tabla.
+        while (temp.getRowCount() > 0) {
+            temp.removeRow(0);
+        }
+    }
+//Esta función sire para cargar el jTable de los datos de busqueda de proveedor
+    private void llenarTabla() throws SQLException{
+        limpiarTabla();
+        
+        UsuarioDao dao = new UsuarioDao();
+        
+        List<UsuarioLogica> miLista = dao.getLista(this.jTFFiltro.getText());
+        
+        DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
+        
+        miLista.stream().map((cl) -> {
+           Object [] fila = new Object [5];
+           fila[0] = cl.getIdusuario();
+            fila[1] = cl.getNombre();
+            fila[2] = cl.getContrasenia();
+            fila[3] = cl.getEstado();
+            fila[4] = cl.getIdempleado();
+            return fila;
+        }).forEachOrdered((fila) -> {
+            tabla.addRow(fila);
+        });  
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,34 +67,46 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTFFiltro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTbMostrar = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
         jLabel2.setText("Buscar:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 288, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTFFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFFiltroActionPerformed(evt);
+            }
+        });
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 288, -1));
+
+        jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IdUsuario", "Usuario", "Passwork", "Estado", "NombreEmpleado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTbMostrar);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 595, 223));
 
@@ -75,6 +126,22 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTFFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFFiltroKeyReleased
+        // TODO add your handling code here:
+        //Esto al escribir convierte el texto a mayúscula.
+        this.jTFFiltro.setText(this.jTFFiltro.getText().toUpperCase());
+        //Aqui se actualizan los datos de acuerdo a lo que escribimos en el Textfield.
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFBuscarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTFFiltroKeyReleased
+
+    private void jTFFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFFiltroActionPerformed
+
+    }//GEN-LAST:event_jTFFiltroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -83,7 +150,7 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTFFiltro;
+    private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 }

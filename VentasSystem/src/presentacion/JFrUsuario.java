@@ -16,18 +16,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
- * @author ERICK GALLARDO
+ * @author Nixon Sanchez
  */
-public class JIFLogin extends javax.swing.JInternalFrame {
+public class JFrUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form JIFLogin
+     * Creates new form JFrUsuario
      */
-    public JIFLogin() {
+    public JFrUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    private void login() throws SQLException{
+    
+     private void login() throws SQLException{
         try {
             UsuarioLogica cu = new UsuarioLogica();
             UsuarioDao du = new UsuarioDao();
@@ -36,7 +37,7 @@ public class JIFLogin extends javax.swing.JInternalFrame {
             int cod = du.existeUsuario(cu);
             if(du.existeUsuario(cu)>0){
                 try{
-                    this.hide();
+                   
                     JFraMDI a = new JFraMDI();             
                     a.show();
                     
@@ -67,7 +68,7 @@ public class JIFLogin extends javax.swing.JInternalFrame {
             this.jTFUsuario.requestFocus();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,6 +84,8 @@ public class JIFLogin extends javax.swing.JInternalFrame {
         jBtnIngresar = new javax.swing.JButton();
         jBtnCanselar = new javax.swing.JButton();
         jPFContrasena = new javax.swing.JPasswordField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Usuario:");
 
@@ -106,8 +109,8 @@ public class JIFLogin extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -122,12 +125,12 @@ public class JIFLogin extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBtnIngresar)
                     .addComponent(jBtnCanselar))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(117, 117, 117)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,25 +140,59 @@ public class JIFLogin extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jBtnCanselar)
                     .addComponent(jPFContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIngresarActionPerformed
+        try{
+            validar();
+            login();
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "usuario o password invalido");
+        }
+    }//GEN-LAST:event_jBtnIngresarActionPerformed
+
     private void jBtnCanselarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCanselarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBtnCanselarActionPerformed
 
-    private void jBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIngresarActionPerformed
-      try{
-          validar();
-          login();
-      }catch (SQLException e){
-          
-      }
-    }//GEN-LAST:event_jBtnIngresarActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JFrUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JFrUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JFrUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JFrUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JFrUsuario().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCanselar;
@@ -165,8 +202,4 @@ public class JIFLogin extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField jPFContrasena;
     private javax.swing.JTextField jTFUsuario;
     // End of variables declaration//GEN-END:variables
-
-    private void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

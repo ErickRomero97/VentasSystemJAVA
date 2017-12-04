@@ -386,8 +386,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        JIFBuscarUsuario frm;
-        frm = new JIFBuscarUsuario();
+        JIFBuscarUsuario frm = null;
+        try {
+            frm = new JIFBuscarUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
@@ -410,8 +414,12 @@ public class JFraMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        JIFUsuario frm;
-        frm = new JIFUsuario();
+        JIFUsuario frm = null;
+        try {
+            frm = new JIFUsuario();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFraMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(frm);
         frm.show();
         Dimension dim = jDesktopPane1.getSize();
