@@ -23,7 +23,8 @@ public class FacturaDao {
     
     //Declaracion del Metodo de Insercion de la Relación Factura
     public void insertarFactura(FacturaLogica c1) throws SQLException{
-        String sql = "{call sp_ingresarfactura(?,?,?,?}";
+        String sql = "Insert into factura (fechafactura,idtipofactura,rtncliente,idusuario) "
+        + "values (?,?,?,?)";
         PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql);
         st.setString(1, c1.getFechaFactura());
         st.setInt(2, c1.getIdTipoFactura());     

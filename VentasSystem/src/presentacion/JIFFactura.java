@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class JIFFactura extends javax.swing.JInternalFrame {
     
     //Declaración de las Variables Necesarias para los datos caculados.
-    public int existencia, existenciaMinima;
+    public double existencia, existenciaMinima;
     private int registro = 0;
     private int codFactura = 0;
     
@@ -69,9 +69,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
             ps = cnn.prepareStatement("{call sp_mostrartipofactura()}");
             ResultSet rs = ps.executeQuery ();
                 while(rs.next()){
-  	    	   String tipo;
-                   tipo= rs.getString("tipofactura");
-                   this.jCboTipoFactura.addItem(tipo);
+                   jCboTipoFactura.addItem(rs.getString("tipofactura"));
                 }
                 ps.close();
 
@@ -112,16 +110,10 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     //Metodo de Inserción de Datos en la Relacion Factura.
     private void guardarFactura(){
         FacturaLogica cl = new FacturaLogica();
-        int tipo=0;
-        if(this.jCboTipoFactura.getSelectedIndex() == 0 ){
-            tipo = 1;
-        }else if(this.jCboTipoFactura.getSelectedIndex() == 1){
-            tipo = 2;
-        }
         cl.setFechaFactura(this.jFTFFecha.getText()); 
-        cl.setIdTipoFactura(tipo);
+        cl.setIdTipoFactura(this.jCboTipoFactura.getSelectedIndex());
         cl.setRtnCliente(this.jTFCliente.getText());
-        //cl.setCodUsuario(Integer.parseInt(MDIPrincipal.jLblId.getText()));
+        cl.setIdUsuario(2);
         try{
             FacturaDao dao = new FacturaDao();
             dao.insertarFactura(cl);
@@ -135,10 +127,10 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     private void agregarDetalle(){
         for(int i = 0; i < this.jTbMostrar.getRowCount(); i++){
             FacturaLogica cf = new FacturaLogica();
-            cf.setIdFactura(codFactura);
             cf.setIdProducto(Integer.parseInt((String) this.jTbMostrar.getValueAt(i, 0)));
-            cf.setCantidad(Double.parseDouble((String) this.jTbMostrar.getValueAt(i, 3)));
-            cf.setPrecio(Double.parseDouble((String) this.jTbMostrar.getValueAt(i, 2)));
+            cf.setIdFactura(codFactura);
+            cf.setCantidad(Double.parseDouble((String) this.jTbMostrar.getValueAt(i, 2)));
+            cf.setPrecio(Double.parseDouble((String) this.jTbMostrar.getValueAt(i, 1)));
             try{
                 FacturaDao dao = new FacturaDao();
                 dao.insertarDetalle(cf);     
@@ -224,7 +216,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         double isv;
         double total;
         for(int i = 0; i < this.jTbMostrar.getRowCount(); i++){
-            subtotal = subtotal + (double)(this.jTbMostrar.getValueAt(i, 4));
+            subtotal = subtotal + (double)(this.jTbMostrar.getValueAt(i, 3));
         }
         isv = subtotal * 0.15;
         total = subtotal + isv;
@@ -319,7 +311,11 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
         jCboTipoFactura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
 
-        jFTFFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        try {
+            jFTFFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -339,14 +335,14 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBtnBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jCboTipoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,20 +395,23 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTFCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jBtnBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(310, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
-                        .addComponent(jBtnAgregar)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                        .addGap(49, 49, 49)
+                        .addComponent(jBtnAgregar)
+                        .addGap(66, 66, 66))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,16 +421,18 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTFCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnBuscarProducto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnAgregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAgregar)
+                    .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap())
         );
 
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
@@ -439,7 +440,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CodProducto", "Cantidad", "Precio", "SubTotal"
+                "CodProducto", "Precio", "Cantidad", "SubTotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -514,7 +515,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
                 .addContainerGap())
@@ -532,6 +532,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                     .addComponent(jTFIsv)
                     .addComponent(jTFTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                 .addGap(53, 53, 53))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,7 +558,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10)
                             .addComponent(jTFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -623,47 +624,37 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
     // Boton de Buscar el Cliente para la Factura.
     private void jBtnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarClienteActionPerformed
-        JIFBuscarCliente buscar;
+        JDFBuscarCliente buscarProv;
         try {
-            
-            buscar = new JIFBuscarCliente();
-            buscar.setVisible(true);
+            buscarProv = new JDFBuscarCliente(null, true);
+            buscarProv.setVisible(true);
 
-            if (buscar.getRtnCliente()!= "0")
+            if (buscarProv.getRtnCliente()!= "0")
             {
-                this.jTFCliente.setText(buscar.getRtnCliente());
-                this.jTFCliente.requestFocus();
-
+                this.jTFCliente.setText(String.valueOf(buscarProv.getRtnCliente()));
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnBuscarClienteActionPerformed
     
     //Boton de Busqueda del Producto.
     private void jBtnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarProductoActionPerformed
-        /*JIFBuscarProducto buscar;
-        JIFProducto f;
-
+        JDFBuscarProducto buscarProv;
         try {
-            f = new JIFProducto();
-            buscar = new JIFBuscarProducto(f, true);
-            buscar.setVisible(true);
+            buscarProv = new JDFBuscarProducto(null, true);
+            buscarProv.setVisible(true);
 
-            if (buscar.()!= "0")
+            if (buscarProv.getCodProducto()!= 0)
             {
-                this.jTFCodigoProducto.setText(String.valueOf(buscar.getCodProducto()));
-                this.jlblDescripcion.setText(String.valueOf(buscar.getDescripcion()));
-                this.jTFPrecio.setText(String.valueOf(buscar.getPrecio()));
-                existencia = Integer.parseInt(buscar.getExistencia());
-                existenciaMinima = Integer.parseInt(buscar.getExistenciaMinima());
-                this.jTFCodigoProducto.requestFocus();
+                this.jTFCodigoProducto.setText(String.valueOf(buscarProv.getCodProducto()));
+                this.jTFPrecio.setText(String.valueOf(buscarProv.getPrecioVenta()));
+                existencia = Double.parseDouble(String.valueOf(buscarProv.getExistencia()));
+                existenciaMinima = Double.parseDouble(String.valueOf(buscarProv.getExistenciaMinima()));
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(jFraGestionProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+            Logger.getLogger(JIFFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBtnBuscarProductoActionPerformed
     
     //Boton de Nuevo Registro en la Relación Factura

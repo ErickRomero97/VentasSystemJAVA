@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import conexion.Conexion;
@@ -39,7 +34,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         this.jTFExistenciaMinima.setText("");
         this.jTFPrecioVenta.setText("");
         this.jTFPrecioCompra.setText("");
-        this.jTFProductoCol.setText("");
         this.jTFCodigoProveedor.setText("");
         this.jTFNombreProveedor.setText("");
     }
@@ -61,7 +55,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         this.jTFExistenciaMinima.setEnabled(valor);
         this.jTFPrecioVenta.setEnabled(valor);
         this.jTFPrecioCompra.setEnabled(valor);
-        this.jTFProductoCol.setEnabled(valor);
         this.jTFCodigoProveedor.setEnabled(valor);
         this.jTFNombreProveedor.setEnabled(valor);
         this.jBtnBuscarProveedor.setEnabled(valor);
@@ -95,10 +88,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
             jTFPrecioCompra.requestFocus();
             JOptionPane.showMessageDialog(null,"Ingrese el precio de compra del producto",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             estado = false;
-        }else if(this.jTFProductoCol.getText().length()==0){
-            jTFProductoCol.requestFocus();
-            JOptionPane.showMessageDialog(null,"Ingrese la colocación del producto",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            estado = false;
         }else if(this.jTFCodigoProveedor.getText().length() == 0 && this.jTFNombreProveedor.getText().length() == 0){
             jTFNombreProducto.requestFocus();
             JOptionPane.showMessageDialog(null,"Por favor elija un proveedor",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
@@ -111,9 +100,9 @@ public class JIFProducto extends javax.swing.JInternalFrame {
     //Esta funcion oculta la columna idproveedor en el jTable
     private void ocultarColumnas(){
         //Oculta la columna de IdProveedor
-        jTblDatosProducto.getColumnModel().getColumn(7).setMaxWidth(0);
-        jTblDatosProducto.getColumnModel().getColumn(7).setMinWidth(0);
-        jTblDatosProducto.getColumnModel().getColumn(7).setPreferredWidth(0);
+        jTblDatosProducto.getColumnModel().getColumn(6).setMaxWidth(0);
+        jTblDatosProducto.getColumnModel().getColumn(6).setMinWidth(0);
+        jTblDatosProducto.getColumnModel().getColumn(6).setPreferredWidth(0);
     }
     
     //Esta funcion limpia la jTable
@@ -133,22 +122,16 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         List<ProductoLogica> miLista = dao.getLista(this.jTFFiltro.getText());
         
         DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProducto.getModel(); 
-        
-        /*jTblDatosProveedor.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTblDatosProveedor.getColumnModel().getColumn(0).setMinWidth(0);
-        jTblDatosProveedor.getColumnModel().getColumn(0).setPreferredWidth(0);*/
-        
         miLista.stream().map((c1) -> {
-            Object[] fila = new Object[9];
+            Object[] fila = new Object[8];
             fila[0] = c1.getIdproducto();
             fila[1] = c1.getNombreProducto();
             fila[2] = c1.getUnidadExistencia();
             fila[3] = c1.getExistenciaMinima();
             fila[4] = c1.getPrecioCompra();
             fila[5] = c1.getPrecioVenta();
-            fila[6] = c1.getProductoCol();
-            fila[7] = c1.getIdproveedor();
-            fila[8] = c1.getProveedor();
+            fila[6] = c1.getIdproveedor();
+            fila[7] = c1.getProveedor();
             return fila;
         }).forEachOrdered((fila) -> {   
             temp.addRow(fila);            
@@ -165,9 +148,8 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                 this.jTFExistenciaMinima.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 3)));
                 this.jTFPrecioCompra.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 4)));
                 this.jTFPrecioVenta.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 5)));
-                this.jTFProductoCol.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 6)));
-                this.jTFCodigoProveedor.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 7)));
-                this.jTFNombreProveedor.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 8)));
+                this.jTFCodigoProveedor.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 6)));
+                this.jTFNombreProveedor.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 7)));
             }            
         }else{
             //limpiar();
@@ -180,11 +162,10 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         
         pl.setIdproducto(Integer.parseInt(this.jTFCodigoProducto.getText()));
         pl.setNombreProducto(this.jTFNombreProducto.getText());
-        pl.setUnidadExistencia(Integer.parseInt(this.jTFUnidadExistencia.getText()));
-        pl.setExistenciaMinima(Integer.parseInt(this.jTFExistenciaMinima.getText()));
+        pl.setUnidadExistencia(Double.parseDouble(this.jTFUnidadExistencia.getText()));
+        pl.setExistenciaMinima(Double.parseDouble(this.jTFExistenciaMinima.getText()));
         pl.setPrecioCompra(Double.parseDouble(this.jTFPrecioCompra.getText()));
         pl.setPrecioVenta(Double.parseDouble(this.jTFPrecioVenta.getText()));
-        pl.setProductoCol(this.jTFProductoCol.getText());
         pl.setIdproveedor(this.jTFCodigoProveedor.getText());
         
         try {
@@ -232,11 +213,10 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         ProductoLogica pl = new ProductoLogica();
         
         pl.setNombreProducto(this.jTFNombreProducto.getText());
-        pl.setUnidadExistencia(Integer.parseInt(this.jTFUnidadExistencia.getText()));
-        pl.setExistenciaMinima(Integer.parseInt(this.jTFExistenciaMinima.getText()));
+        pl.setUnidadExistencia(Double.parseDouble(this.jTFUnidadExistencia.getText()));
+        pl.setExistenciaMinima(Double.parseDouble(this.jTFExistenciaMinima.getText()));
         pl.setPrecioCompra(Double.parseDouble(this.jTFPrecioCompra.getText()));
         pl.setPrecioVenta(Double.parseDouble(this.jTFPrecioVenta.getText()));
-        pl.setProductoCol(this.jTFProductoCol.getText());
         pl.setIdproveedor(this.jTFCodigoProveedor.getText());
         pl.setIdproducto(Integer.parseInt(this.jTFCodigoProducto.getText()));
         
@@ -274,8 +254,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTFPrecioCompra = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTFProductoCol = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTFCodigoProveedor = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -298,11 +276,11 @@ public class JIFProducto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CodigoProducto", "NombreProducto", "UnidadExistencia", "ExistenciaMinima", "PrecioCompra", "PrecioVenta", "ProductoCol", "IdProveedor", "Proveedor"
+                "CodigoProducto", "NombreProducto", "UnidadExistencia", "ExistenciaMinima", "PrecioCompra", "PrecioVenta", "IdProveedor", "Proveedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -374,8 +352,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Precio Compra:");
 
-        jLabel7.setText("Producto colocación:");
-
         jLabel8.setText("Codigo Proveedor:");
 
         jTFCodigoProveedor.setEditable(false);
@@ -436,10 +412,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTFProductoCol, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -475,11 +447,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jTFPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTFProductoCol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTFCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -570,7 +538,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -610,9 +578,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
 
     //Este evento abre un jDialogForm para traer los datos del proveedor
     private void jBtnBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarProveedorActionPerformed
-        // TODO add your handling code here:
-        //jFFPrueba f = new jFFPrueba();
-
+       
         JDFBuscarProveedor buscarProv;
         try {
             buscarProv = new JDFBuscarProveedor(null, true);
@@ -625,7 +591,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException ex) {
-            //Logger.getLogger(jIFFMatricula.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnBuscarProveedorActionPerformed
 
@@ -668,6 +634,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
     //Este evento nos permite crear un nuevo registro
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         limpiar();
+        jTFNombreProducto.requestFocus();
         habilitarBotones(false,true,false,true, true);
         try {
             autoIncrementarIdProveedor();
@@ -693,7 +660,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -708,7 +674,6 @@ public class JIFProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombreProveedor;
     private javax.swing.JTextField jTFPrecioCompra;
     private javax.swing.JTextField jTFPrecioVenta;
-    private javax.swing.JTextField jTFProductoCol;
     private javax.swing.JTextField jTFUnidadExistencia;
     private javax.swing.JTable jTblDatosProducto;
     // End of variables declaration//GEN-END:variables

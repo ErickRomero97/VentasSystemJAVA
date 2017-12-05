@@ -14,10 +14,6 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         llenarTabla();
     }
 
-    JIFBuscarCliente(JIFCliente f, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     //Metodo de Limpiar la Tabla de Datos.
     private void limpiarTabla(){
         DefaultTableModel temp = (DefaultTableModel) this.jTbMostrar.getModel(); 
@@ -101,7 +97,7 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
                 jTFFiltroKeyReleased(evt);
             }
         });
-        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 288, 20));
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 288, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -116,7 +112,7 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 10, -1, 70));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Picture2.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 910, 400));
@@ -155,7 +151,5 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTbMostrar;
     // End of variables declaration//GEN-END:variables
 
-    String getRtnCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }

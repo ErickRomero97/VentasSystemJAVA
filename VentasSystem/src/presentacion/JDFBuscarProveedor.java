@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import dao.ProveedorDao;
@@ -13,10 +8,6 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import logica.ProveedorLogica;
 
-/**
- *
- * @author Miguel
- */
 public class JDFBuscarProveedor extends javax.swing.JDialog {
     //Variables creadas para capturar la informacion que devolvera el jDialogForm
     private String codigoProveedor, nombreProveedor;
@@ -66,10 +57,13 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
         DefaultTableModel temp = (DefaultTableModel) this.jTblDatosProveedor.getModel(); 
         
         miLista.stream().map((c1) -> {
-            Object[] fila = new Object[3];
+            Object[] fila = new Object[6];
             fila[0] = c1.getIdProveedor();
             fila[1] = c1.getNombre();
-            fila[2] = c1.getTelefono();
+            fila[2] = c1.getApellido();
+            fila[3] = c1.getDireccion();
+            fila[4] = c1.getTelefono();
+            fila[5] = c1.getSexo();
             return fila;
         }).forEachOrdered((fila) -> {   
             temp.addRow(fila);            
@@ -78,8 +72,7 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
     
     //Devuelve los datos de la fila seleccionada
     private void filaSeleccionada() throws SQLException{
-        if (this.jTblDatosProveedor.getSelectedRow() != -1)
-        {
+        if (this.jTblDatosProveedor.getSelectedRow() != -1){
         codigoProveedor = String.valueOf(this.jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 0));
         nombreProveedor = String.valueOf(this.jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 1));
          this.dispose();
@@ -114,11 +107,11 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "IdProveedor", "Nombre Proveedor", "Telefono"
+                "IdProveedor", "Nombre", "Apellido", "Direccion", "Telefono", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -138,13 +131,14 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,8 +147,8 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -170,19 +164,17 @@ public class JDFBuscarProveedor extends javax.swing.JDialog {
             Logger.getLogger(JDFBuscarProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
-    
-    //Este evento cuenta los click que se le da a una fila y devuelve sus datos.
+
     private void jTblDatosProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblDatosProveedorMouseClicked
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2){
-            try {                
+         if (evt.getClickCount() == 2){
+            try {
                 filaSeleccionada();
             } catch (SQLException ex) {
-                Logger.getLogger(JIFProducto.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JIFBuscarProveedor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jTblDatosProveedorMouseClicked
-
+    
     /**
      * @param args the command line arguments
      */

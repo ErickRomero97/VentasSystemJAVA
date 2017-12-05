@@ -18,7 +18,6 @@ import logica.ProductoLogica;
  * @author Miguel
  */
 public class JIFBuscarProducto extends javax.swing.JInternalFrame {
-
     /**
      * Creates new form JIFBuscarProducto
      */
@@ -26,6 +25,8 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
         initComponents();
         llenarTabla();
     }
+    
+    
     
     //Esta funcion limpia la jTable
     private void limpiarTabla(){      
@@ -50,9 +51,9 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
             fila[0] = c1.getIdproducto();
             fila[1] = c1.getNombreProducto();
             fila[2] = c1.getUnidadExistencia();
-            fila[3] = c1.getPrecioCompra();
-            fila[4] = c1.getPrecioVenta();
-            fila[5] = c1.getProductoCol();
+            fila[3] = c1.getExistenciaMinima();
+            fila[4] = c1.getPrecioCompra();
+            fila[5] = c1.getPrecioVenta();
             fila[6] = c1.getProveedor();
             return fila;
         }).forEachOrdered((fila) -> {   
@@ -73,12 +74,14 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
         jTFFiltro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jTblDatosProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CodigoProducto", "NombreProducto", "UnidadExistencia", "PrecioCompra", "PrecioVenta", "ProductoCol", "Proveedor"
+                "CodigoProducto", "NombreProducto", "UnidadExistencia", "Existencia Minima", "PrecioCompra", "PrecioVenta", "Proveedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -103,32 +106,24 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(118, 118, 118)
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(113, 113, 113))
-                        .addComponent(jScrollPane1))
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +138,7 @@ public class JIFBuscarProducto extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFBuscarProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

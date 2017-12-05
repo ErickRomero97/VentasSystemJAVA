@@ -80,18 +80,17 @@ public class JIFLogin extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFUsuario = new javax.swing.JTextField();
-        jBtnIngresar = new javax.swing.JButton();
-        jBtnCanselar = new javax.swing.JButton();
         jPFContrasena = new javax.swing.JPasswordField();
+        jBtnCanselar = new javax.swing.JButton();
+        jBtnIngresar = new javax.swing.JButton();
 
         jLabel1.setText("Usuario:");
 
         jLabel2.setText("Contraseña:");
 
-        jBtnIngresar.setText("Ingresar");
-        jBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIngresarActionPerformed(evt);
+        jTFUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFUsuarioFocusLost(evt);
             }
         });
 
@@ -101,6 +100,8 @@ public class JIFLogin extends javax.swing.JInternalFrame {
                 jBtnCanselarActionPerformed(evt);
             }
         });
+
+        jBtnIngresar.setText("Ingresar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +121,8 @@ public class JIFLogin extends javax.swing.JInternalFrame {
                         .addComponent(jPFContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnIngresar)
-                    .addComponent(jBtnCanselar))
+                    .addComponent(jBtnCanselar)
+                    .addComponent(jBtnIngresar))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,7 +138,7 @@ public class JIFLogin extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jBtnCanselar)
                     .addComponent(jPFContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,14 +148,9 @@ public class JIFLogin extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnCanselarActionPerformed
 
-    private void jBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIngresarActionPerformed
-      try{
-          validar();
-          login();
-      }catch (SQLException e){
-          
-      }
-    }//GEN-LAST:event_jBtnIngresarActionPerformed
+    private void jTFUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFUsuarioFocusLost
+        jPFContrasena.requestFocus();
+    }//GEN-LAST:event_jTFUsuarioFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

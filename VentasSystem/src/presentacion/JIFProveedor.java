@@ -193,12 +193,7 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
                 this.jTFApellido.setText(String.valueOf(jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 2)));
                 this.jTADireccion.setText(String.valueOf(jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 3)));
                 this.jFFTelefono.setText(String.valueOf(jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 4)));
-                sexo = String.valueOf(jTblDatosProveedor.getValueAt(this.jTblDatosProveedor.getSelectedRow(), 5));
-                if(sexo.equals("Masculino")){
-                    this.jCboSexo.setSelectedIndex(1);
-                }else{
-                    this.jCboSexo.setSelectedIndex(2);
-                }                           
+                this.jCboSexo.setSelectedItem(String.valueOf(this.jTblDatosProveedor.getValueAt(jTblDatosProveedor.getSelectedRow(), 5)));                         
             }            
         }else{
             limpiar();
@@ -490,6 +485,8 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
     private void jTblDatosProveedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblDatosProveedorMousePressed
         habilitarBotones(false, false, true, true, true);
         filaSeleccionada();
+        jFFCodigoProveedor.setEditable(false);
+        jTFNombre.requestFocus();
     }//GEN-LAST:event_jTblDatosProveedorMousePressed
 
     //En este evento se evalua cuando el usuario escribe en la TextField  y devuelve el resultado actualizando la jTable.
@@ -509,6 +506,7 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         limpiar();
         habilitarBotones(false,true,false,true, true);
         this.jFFCodigoProveedor.requestFocus();
+        this.jFFCodigoProveedor.setEditable(true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     //En este evento se verifican lso datos antes de proceder a guardar los datos.

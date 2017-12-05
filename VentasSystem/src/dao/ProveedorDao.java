@@ -111,11 +111,14 @@ public class ProveedorDao {
             miLista = (List<ProveedorLogica>) new ArrayList<ProveedorLogica>();
             
             while (rs.next()) {
-                ProveedorLogica pl = new ProveedorLogica();
-                pl.setIdProveedor(rs.getString("idproveedor"));
-                pl.setNombre(rs.getString("nombreproveedor"));
-                pl.setTelefono(rs.getString("telefono"));
-                miLista.add(pl);
+                ProveedorLogica cl = new ProveedorLogica();
+                cl.setIdProveedor(rs.getString("idproveedor"));
+                cl.setNombre(rs.getString("nombre"));
+                cl.setApellido(rs.getString("apellido"));
+                cl.setDireccion(rs.getString("direccion"));
+                cl.setTelefono(rs.getString("telefono"));
+                cl.setSexo(rs.getString("sexo"));
+                miLista.add(cl);
             }rs.close();
         }
         return miLista;
@@ -135,12 +138,14 @@ public class ProveedorDao {
             miLista = (List<ProveedorLogica>) new ArrayList<ProveedorLogica>();
             
             while (rs.next()) {
-                ProveedorLogica pl = new ProveedorLogica();
-                pl.setIdProveedor(rs.getString("idproveedor"));
-                pl.setNombre(rs.getString("nombreproveedor"));
-                pl.setTelefono(rs.getString("telefono"));
-                pl.setDireccion(rs.getString("direccion"));
-                miLista.add(pl);
+                ProveedorLogica cl = new ProveedorLogica();
+                cl.setIdProveedor(rs.getString("idproveedor"));
+                cl.setNombre(rs.getString("nombre"));
+                cl.setApellido(rs.getString("apellido"));
+                cl.setDireccion(rs.getString("direccion"));
+                cl.setTelefono(rs.getString("telefono"));
+                cl.setSexo(rs.getString("sexo"));
+                miLista.add(cl);
             }rs.close();
         }
         return miLista;

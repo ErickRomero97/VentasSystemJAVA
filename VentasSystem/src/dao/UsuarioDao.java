@@ -106,7 +106,21 @@ public class UsuarioDao {
         return retorno;
     }
 
-    
+    //Declaracion del Metodo de Investigación del Correlativo la Relación Usuario
+    public int obtenerCodFactura(UsuarioLogica c1) throws SQLException{    
+        int Id = 0;
+        try{
+            //Declaración del Procedimiento Almacenado de Investigar Correlativo de la Relación Usuario.
+            String sql = "{call sp_investigarcorrelativo1()}";
+            Statement ai = con.createStatement();
+            ResultSet ia = ai.executeQuery(sql);
+            ia.first();
+            Id = ia.getInt("Cod");
+        }catch(java.sql.SQLException e){
+            JOptionPane.showMessageDialog(null, "Error" + e);
+        }
+        return Id;
+    }
 
        
 }

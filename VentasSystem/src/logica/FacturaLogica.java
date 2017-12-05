@@ -109,5 +109,7 @@ public class FacturaLogica {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
+    
    
 }

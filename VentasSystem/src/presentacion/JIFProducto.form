@@ -46,7 +46,7 @@
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="70" max="32767" attributes="0"/>
+              <EmptySpace pref="80" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -118,14 +118,13 @@
             <Component class="javax.swing.JTable" name="jTblDatosProducto">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="0">
+                  <Table columnCount="8" rowCount="0">
                     <Column editable="false" title="CodigoProducto" type="java.lang.Object"/>
                     <Column editable="false" title="NombreProducto" type="java.lang.Object"/>
                     <Column editable="false" title="UnidadExistencia" type="java.lang.Object"/>
                     <Column editable="false" title="ExistenciaMinima" type="java.lang.Object"/>
                     <Column editable="false" title="PrecioCompra" type="java.lang.Object"/>
                     <Column editable="false" title="PrecioVenta" type="java.lang.Object"/>
-                    <Column editable="false" title="ProductoCol" type="java.lang.Object"/>
                     <Column editable="false" title="IdProveedor" type="java.lang.Object"/>
                     <Column editable="false" title="Proveedor" type="java.lang.Object"/>
                   </Table>
@@ -221,11 +220,6 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTFProductoCol" min="-2" pref="116" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jTFCodigoProveedor" min="-2" pref="156" max="-2" attributes="0"/>
@@ -272,12 +266,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFPrecioCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTFProductoCol" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTFCodigoProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -333,13 +322,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFPrecioCompra">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Producto colocaci&#xf3;n:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTFProductoCol">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>

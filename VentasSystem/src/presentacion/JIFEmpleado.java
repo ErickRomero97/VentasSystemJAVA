@@ -155,7 +155,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     //Metodo de Verificacion de Datos de las Cajas de Texto.
     private boolean verificarDatos() throws SQLException{
         boolean valor = true;
-        if (this.jFTFCodigo.getText().length()==0){
+        if (jFTFCodigo.getText().trim().length() != 15){
             JOptionPane.showMessageDialog(null,"Ingrese el Codigo del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jFTFCodigo.requestFocus();
             valor = false;
@@ -469,6 +469,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         limpiar();
         jFTFCodigo.requestFocus();
+        jFTFCodigo.setEditable(true);
         habilitarBotones(false,true,false,true, true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
     
@@ -524,7 +525,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     //Evento de la Tabla de Datos.
     private void jTbMostrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMousePressed
         lineaSeleccionada();
-        jFTFCodigo.enable(false);
+        jFTFCodigo.setEditable(false);
+        jTFNombre.requestFocus();
     }//GEN-LAST:event_jTbMostrarMousePressed
 
 

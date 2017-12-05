@@ -152,7 +152,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     //Metodo de Verificación de los Datos dentro de las Cajas de Texto.
     private boolean verificarDatos() throws SQLException{
         boolean valor = true;
-        if (this.jFTFCodigo.getText().length()==0){
+        if (jFTFCodigo.getText().trim().length() != 16){
             JOptionPane.showMessageDialog(null,"Ingrese el RTN del Cliente",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jFTFCodigo.requestFocus();
             valor = false;
@@ -227,7 +227,6 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
-        jBtnEditar = new javax.swing.JButton();
         jBtnBorrar = new javax.swing.JButton();
         jTFFiltro = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -271,17 +270,14 @@ public class JIFCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTbMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTbMostrarMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbMostrar);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 632, 204));
-
-        jBtnEditar.setText("editar");
-        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         jBtnBorrar.setText("Borrar");
         jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -450,21 +446,21 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         limpiar();
         jFTFCodigo.requestFocus();
+        jFTFCodigo.setEditable(true);
         habilitarBotones(false,true,false,true, true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
     
-    //Metodo de Accion del Boton Editar.
-    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+    private void jTbMostrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMousePressed
         lineaSeleccionada();
-        jFTFCodigo.enable(false);
-    }//GEN-LAST:event_jBtnEditarActionPerformed
+        jFTFCodigo.setEditable(false);
+        jTFNombre.requestFocus();
+    }//GEN-LAST:event_jTbMostrarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
     private javax.swing.JButton jBtnBorrar;
     private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
     private javax.swing.JComboBox<String> jCbosexo;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import conexion.Conexion;
@@ -28,36 +23,34 @@ public class ProductoDao {
     
     //Funcion de tipo void que establece el  procedimiento para insertar un producto
     public void insertarProducto(ProductoLogica pl) throws SQLException{
-        String sql = "{call sp_insertarproducto(?,?,?,?,?,?,?,?)}";
+        String sql = "{call sp_insertarproducto(?,?,?,?,?,?,?)}";
         
         PreparedStatement st = this.con.prepareStatement(sql);
         
         st.setInt(1, pl.getIdproducto());
         st.setString(2, pl.getNombreProducto());
-        st.setInt(3, pl.getUnidadExistencia());
-        st.setInt(4, pl.getExistenciaMinima());
+        st.setDouble(3, pl.getUnidadExistencia());
+        st.setDouble(4, pl.getExistenciaMinima());
         st.setDouble(5, pl.getPrecioCompra());
         st.setDouble(6, pl.getPrecioVenta());
-        st.setString(7, pl.getProductoCol());
-        st.setString(8, pl.getIdproveedor());
+        st.setString(7, pl.getIdproveedor());
         
         st.execute();
     }
     
      //Funcion de tipo void que establece el  procedimiento para actualizar un producto
     public void actualizarProducto(ProductoLogica pl) throws SQLException{
-        String sql = "{call sp_actualizarproducto(?,?,?,?,?,?,?,?)}";
+        String sql = "{call sp_actualizarproducto(?,?,?,?,?,?,?)}";
         
         PreparedStatement st = this.con.prepareStatement(sql);
                 
         st.setString(1, pl.getNombreProducto());
-        st.setInt(2, pl.getUnidadExistencia());
-        st.setInt(3, pl.getExistenciaMinima());
+        st.setDouble(2, pl.getUnidadExistencia());
+        st.setDouble(3, pl.getExistenciaMinima());
         st.setDouble(4, pl.getPrecioCompra());
         st.setDouble(5, pl.getPrecioVenta());
-        st.setString(6, pl.getProductoCol());
-        st.setString(7, pl.getIdproveedor());
-        st.setInt(8, pl.getIdproducto());
+        st.setString(6, pl.getIdproveedor());
+        st.setInt(7, pl.getIdproducto());
         
         
         st.execute();
@@ -95,9 +88,8 @@ public class ProductoDao {
                 pl.setExistenciaMinima(rs.getInt("existenciaminima"));
                 pl.setPrecioCompra(rs.getDouble("preciocompra"));
                 pl.setPrecioVenta(rs.getDouble("precioventa"));
-                pl.setProductoCol(rs.getString("productocol"));
                 pl.setIdproveedor(rs.getString("idproveedor"));
-                pl.setProveedor(rs.getString("NombreProveedor"));
+                pl.setProveedor(rs.getString("nombreproveedor"));
                 miLista.add(pl);
             }rs.close();
         }
