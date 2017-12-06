@@ -80,7 +80,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTbMostrar);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 670, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 690, 210));
 
         jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

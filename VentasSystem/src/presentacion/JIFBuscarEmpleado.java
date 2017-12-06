@@ -95,12 +95,12 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
                 jTFFiltroKeyReleased(evt);
             }
         });
-        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 288, -1));
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 320, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
         jLabel2.setText("Buscar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Valken", 0, 24)); // NOI18N
         jLabel5.setText("Busqueda Empleado");

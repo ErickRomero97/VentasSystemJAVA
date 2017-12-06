@@ -229,7 +229,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         jTbMostrar = new javax.swing.JTable();
         jBtnBorrar = new javax.swing.JButton();
         jTFFiltro = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jTFApellido = new javax.swing.JTextField();
         jTFDireccion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -279,25 +279,28 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 632, 204));
 
+        jBtnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete.png"))); // NOI18N
         jBtnBorrar.setText("Borrar");
         jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnBorrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 80, -1));
+        getContentPane().add(jBtnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 100, -1));
 
         jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFFiltroKeyReleased(evt);
             }
         });
-        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 155, -1));
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, -1));
 
-        jLabel2.setText("Buscar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 23));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
+        jLabel3.setText("Buscar:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
         getContentPane().add(jTFApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 130, 139, -1));
-        getContentPane().add(jTFDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 210, 325, 55));
+        getContentPane().add(jTFDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 210, 325, 70));
 
         jLabel8.setText("RTN Cliente:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, -1));
@@ -315,13 +318,14 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         jCbosexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         getContentPane().add(jCbosexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 170, 139, -1));
 
+        jBtnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
         jBtnNuevo.setText("Nuevo");
         jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, -1, -1));
+        getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, -1, -1));
 
         try {
             jFTFTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
@@ -337,22 +341,25 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         }
         getContentPane().add(jFTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 210, -1));
 
+        jBtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disk.png"))); // NOI18N
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 310, -1, -1));
+        getContentPane().add(jBtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, -1, -1));
 
+        jBtnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/update.png"))); // NOI18N
         jBtnActualizar.setText("Actualizar");
         jBtnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 310, -1, -1));
+        getContentPane().add(jBtnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 310, -1, -1));
 
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelnew.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -470,7 +477,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

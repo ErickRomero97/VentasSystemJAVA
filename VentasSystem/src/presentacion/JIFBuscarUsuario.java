@@ -81,7 +81,7 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
         jLabel2.setText("Buscar:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jTFFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
                 jTFFiltroKeyReleased(evt);
             }
         });
-        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 288, -1));
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 288, -1));
 
         jTbMostrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
