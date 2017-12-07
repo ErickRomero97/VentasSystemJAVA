@@ -99,7 +99,7 @@ public class ProveedorDao {
     
     //Funcion de tipo void que stablece el procedimiento para llenar el jTable de buscar un proveedor en la pantalla de producto
     public List<ProveedorLogica> getListaProveedor(String filtro) throws SQLException{
-        String sql= "{call sp_buscarproveedor1(?)}";
+        String sql= "{call sp_buscarproveedor(?)}";
         
         List<ProveedorLogica> miLista;
              
@@ -126,7 +126,7 @@ public class ProveedorDao {
     
     //Funcion de tipo void que stablece el procedimiento para llenar un jTable en la busqueda de proveedor
     public List<ProveedorLogica> getListaBuscarProveedor(String filtro) throws SQLException{
-        String sql= "{call sp_buscarproveedor1(?)}";
+        String sql= "{call sp_buscarproveedor(?)}";
         
         List<ProveedorLogica> miLista;
              

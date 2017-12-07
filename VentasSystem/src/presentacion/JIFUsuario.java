@@ -267,7 +267,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdUsuario", "NombreUsuario", "Passwork", "Estado", "NombreEmpleado"
+                "IdUsuario", "NombreUsuario", "Password", "Estado", "NombreEmpleado"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -158,7 +158,7 @@
               <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="IdUsuario" type="java.lang.Object"/>
                 <Column editable="false" title="NombreUsuario" type="java.lang.Object"/>
-                <Column editable="false" title="Passwork" type="java.lang.Object"/>
+                <Column editable="false" title="Password" type="java.lang.Object"/>
                 <Column editable="false" title="Estado" type="java.lang.Object"/>
                 <Column editable="false" title="NombreEmpleado" type="java.lang.Object"/>
               </Table>

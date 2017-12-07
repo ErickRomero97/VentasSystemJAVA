@@ -319,7 +319,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, -1, -1));
 
         jLabel8.setText("Codigo Proveedor:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, -1, -1));
 
         jTFCodigoProducto.setEditable(false);
         getContentPane().add(jTFCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 70, -1));
