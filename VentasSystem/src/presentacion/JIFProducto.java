@@ -2,13 +2,23 @@ package presentacion;
 
 import conexion.Conexion;
 import dao.ProductoDao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.ProductoLogica;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -152,7 +162,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                 this.jTFNombreProveedor.setText(String.valueOf(jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 7)));
             }            
         }else{
-            //limpiar();
+            limpiar();
         }       
     }
     
@@ -181,7 +191,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         
         int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar este producto?", Conexion.nombreapp(), JOptionPane.YES_NO_OPTION);
         if(resp == JOptionPane.YES_OPTION){
-          ProductoLogica pl = new ProductoLogica();
+            ProductoLogica pl = new ProductoLogica();
         
             pl.setIdproducto(Integer.parseInt(String.valueOf(this.jTblDatosProducto.getValueAt(this.jTblDatosProducto.getSelectedRow(), 0))));
 
@@ -262,6 +272,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         jBtnActualizar = new javax.swing.JButton();
         jBtnGuardar = new javax.swing.JButton();
         jBtnNuevo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -309,7 +320,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                 jBtnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
+        getContentPane().add(jBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 130, -1));
 
         jLabel6.setText("Precio Compra:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 240, -1, -1));
@@ -398,6 +409,15 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, -1, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wishlist_add.png"))); // NOI18N
+        jButton1.setText("Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, -1, -1));
+
         jLabel13.setFont(new java.awt.Font("Valken", 0, 36)); // NOI18N
         jLabel13.setText("Gestión Producto");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 320, 40));
@@ -410,6 +430,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 70));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
+        jLabel11.setText("Reporte");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1160, 520));
 
         pack();
@@ -450,8 +471,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
             buscarProv = new JDFBuscarProveedor(null, true);
             buscarProv.setVisible(true);
 
-            if (buscarProv.getCodigoProveedor()!= "0")
-            {
+            if (buscarProv.getCodigoProveedor()!= "0"){
                 this.jTFCodigoProveedor.setText(buscarProv.getCodigoProveedor());
                 this.jTFNombreProveedor.setText(buscarProv.getNombreProveedor());
             }
@@ -510,6 +530,29 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         this.jTFCodigoProducto.requestFocus();
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptProducto.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de los Productos");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
@@ -518,6 +561,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

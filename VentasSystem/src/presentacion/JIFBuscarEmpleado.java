@@ -36,8 +36,8 @@ public class JIFBuscarEmpleado extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((cl) -> {
-           Object [] fila = new Object [6];
-           fila[0] = cl.getIdempleado();
+            Object [] fila = new Object [6];
+            fila[0] = cl.getIdempleado();
             fila[1] = cl.getNombre();
             fila[2] = cl.getApellido();
             fila[3] = cl.getTelefono();

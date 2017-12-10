@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="441c109e-c649-4d43-b304-130e61abdb63">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[Select * 
+From Producto]]>
+	</queryString>
+	<field name="idproducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreproducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidadexistencia" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="existenciaminima" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="preciocompra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioventa" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idproveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="29" width="248" height="30" uuid="90719610-fdcd-4996-9cdb-fc3afd67ac63"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte General de Productos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="-4" width="553" height="1" uuid="9dabab6b-eb22-4898-9ec1-f1589eebbc27"/>
+			</line>
+			<line>
+				<reportElement x="2" y="28" width="553" height="1" uuid="46649093-f397-4776-bab5-557834e9de07"/>
+			</line>
+			<staticText>
+				<reportElement x="23" y="2" width="100" height="20" uuid="3013b8ea-956e-483e-83df-afb8e79e5ff6"/>
+				<text><![CDATA[idproducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="2" width="100" height="20" uuid="251b09d4-b37e-46ac-8a64-ce2b9709ac73"/>
+				<text><![CDATA[nombreproducto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="2" width="100" height="20" uuid="cf4898cd-597f-4f3b-a8fe-6f45c8bfe8cf"/>
+				<text><![CDATA[unidadexistencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="1" width="100" height="20" uuid="4fc9d378-e98e-4698-90d5-4dce14e16f59"/>
+				<text><![CDATA[precioventa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="35" width="553" height="1" uuid="4bc7531a-f3ea-44fe-9d52-7bea72cfb499"/>
+			</line>
+			<textField>
+				<reportElement x="23" y="6" width="100" height="20" uuid="845c1b90-3b70-45d0-893e-01e799959fad"/>
+				<textFieldExpression><![CDATA[$F{idproducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="17" width="100" height="20" uuid="690f0ec9-5e55-4a1d-a702-1380d18be8eb"/>
+				<textFieldExpression><![CDATA[$F{nombreproducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="19" width="100" height="20" uuid="6c75304e-605a-4a45-be45-497fe1dafd58"/>
+				<textFieldExpression><![CDATA[$F{unidadexistencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="19" width="100" height="20" uuid="7df7d898-ed06-4057-a7d0-d260ba77c250"/>
+				<textFieldExpression><![CDATA[$F{precioventa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -45,8 +45,8 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((cl) -> {
-           Object [] fila = new Object [5];
-           fila[0] = cl.getIdusuario();
+            Object [] fila = new Object [5];
+            fila[0] = cl.getIdusuario();
             fila[1] = cl.getNombre();
             fila[2] = cl.getContrasenia();
             fila[3] = cl.getEstado();

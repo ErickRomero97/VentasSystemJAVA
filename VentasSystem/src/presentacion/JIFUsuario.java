@@ -84,8 +84,8 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((cl) -> {
-           Object [] fila = new Object [5];
-           fila[0] = cl.getIdusuario();
+            Object [] fila = new Object [5];
+            fila[0] = cl.getIdusuario();
             fila[1] = cl.getNombre();
             fila[2] = cl.getContrasenia();
             fila[3] = cl.getEstado();
@@ -99,13 +99,13 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         private void lineaSeleccionada(){
         if (this.jTbMostrar.getSelectedRow() != -1) {
             //Habilito los controles para que se pueda hacer una accion.
-                this.jTFFiltro.setText("");
-                habilitarBotones(false,false,true,true,true);
-                this.jTFIdUsuario.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
-                this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
-                this.jTFpassword.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
-                 this.jCboEstado.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
-                this.jTFIdEmpleado.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
+            this.jTFFiltro.setText("");
+            habilitarBotones(false,false,true,true,true);
+            this.jTFIdUsuario.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
+            this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
+            this.jTFpassword.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
+            this.jCboEstado.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
+            this.jTFIdEmpleado.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione el Empleado a Editar");
         }
@@ -113,7 +113,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
     
         
      private void ocultarColumnas(){
-        //Oculta la columna de IdProveedor
+        //Oculta la columna de Contraseña
         jTbMostrar.getColumnModel().getColumn(2).setMaxWidth(0);
         jTbMostrar.getColumnModel().getColumn(2).setMinWidth(0);
         jTbMostrar.getColumnModel().getColumn(2).setPreferredWidth(0);
@@ -126,7 +126,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         this.jCboEstado.setSelectedIndex(0);
     }   
     
-        private void guardar(){
+    private void guardar(){
         int estado;
         boolean estados;
         estado=jCboEstado.getSelectedIndex();
@@ -256,6 +256,8 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         getContentPane().add(jCboEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 150, 140, -1));
         getContentPane().add(jTFIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 80, -1));
         getContentPane().add(jTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 150, 143, -1));
+
+        jTFIdEmpleado.setEditable(false);
         getContentPane().add(jTFIdEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 120, 139, -1));
 
         jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -371,8 +373,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
 
     private void jBtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnActualizarActionPerformed
         try{
-            if(verificarDatos()== true)
-            {
+            if(verificarDatos()== true){
                 editar();
                 llenarTabla();
                 habilitarBotones(true,false,false,false, false);
@@ -387,8 +388,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
 
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
         try{
-            if(verificarDatos()== true)
-            {
+            if(verificarDatos()== true){
                 habilitarBotones(true,false,false,false, false);
                 guardar();
                 limpiar();
@@ -421,8 +421,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
             buscarProv = new JDFBuscarEmpleado(null, true);
             buscarProv.setVisible(true);
 
-            if (buscarProv.getIdEmpleado()!= "0")
-            {
+            if (buscarProv.getIdEmpleado()!= "0"){
                 this.jTFIdEmpleado.setText(String.valueOf(buscarProv.getIdEmpleado()));
             }
         } catch (SQLException ex) {

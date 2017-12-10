@@ -7,15 +7,25 @@ package presentacion;
 
 import conexion.Conexion;
 import dao.ProveedorDao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.ProveedorLogica;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -228,6 +238,7 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         jBtnGuardar = new javax.swing.JButton();
         jBtnActualizar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -352,6 +363,15 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 400, -1, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wishlist_add.png"))); // NOI18N
+        jButton1.setText("Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 110, -1));
+
         jLabel11.setFont(new java.awt.Font("Valken", 0, 36)); // NOI18N
         jLabel11.setText("Gestión Proveedor");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 350, 40));
@@ -435,12 +455,36 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         habilitarBotones(true,false,false,false, false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptProveedor.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de Proveedor");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCboSexo;
     private javax.swing.JFormattedTextField jFFCodigoProveedor;
     private javax.swing.JFormattedTextField jFFTelefono;

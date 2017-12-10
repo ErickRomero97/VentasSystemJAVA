@@ -77,11 +77,10 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         try(Connection cnn = Conexion.conectar()){
             ps = cnn.prepareStatement("{call sp_mostrartipofactura()}");
             ResultSet rs = ps.executeQuery ();
-                while(rs.next()){
-                   jCboTipoFactura.addItem(rs.getString("tipofactura"));
-                }
-                ps.close();
-
+            while(rs.next()){
+               jCboTipoFactura.addItem(rs.getString("tipofactura"));
+            }
+            ps.close();
         }
     }
     
@@ -237,15 +236,15 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     //Metodo de Agregar Articulos a la Tabla de Datos de Factura.
     private void agregarArticulos(){
         double total;
-            total = Double.parseDouble(this.jTFCantidad.getText()) * Double.parseDouble(this.jTFPrecio.getText());             
-            DefaultTableModel modeloMostrar = (DefaultTableModel) this.jTbMostrar.getModel();
-            Object[] fila = new Object[4];     
-            fila[0] = this.jTFCodigoProducto.getText();
-            fila[1] = this.jTFPrecio.getText();
-            fila[2] = this.jTFCantidad.getText();
-            fila[3] = total;
-            modeloMostrar.addRow(fila);
-            this.jTbMostrar.setModel(modeloMostrar);
+        total = Double.parseDouble(this.jTFCantidad.getText()) * Double.parseDouble(this.jTFPrecio.getText());             
+        DefaultTableModel modeloMostrar = (DefaultTableModel) this.jTbMostrar.getModel();
+        Object[] fila = new Object[4];     
+        fila[0] = this.jTFCodigoProducto.getText();
+        fila[1] = this.jTFPrecio.getText();
+        fila[2] = this.jTFCantidad.getText();
+        fila[3] = total;
+        modeloMostrar.addRow(fila);
+        this.jTbMostrar.setModel(modeloMostrar);
     }
     
     //Metodo Main Principal del Formulario Factura.

@@ -29,8 +29,8 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
         List<FacturaLogica> miLista = dao.getLista(this.jTFFiltro.getText());
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         miLista.stream().map((FacturaLogica) -> {
-           Object [] fila = new Object [6];
-           fila[0] = FacturaLogica.getIdFactura();
+            Object [] fila = new Object [6];
+            fila[0] = FacturaLogica.getIdFactura();
             fila[1] = FacturaLogica.getRtnCliente();
             fila[2] = FacturaLogica.getNombreCliente();
             fila[3] = FacturaLogica.getApellidoCliente();

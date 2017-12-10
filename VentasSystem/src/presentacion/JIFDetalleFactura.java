@@ -114,8 +114,8 @@ public class JIFDetalleFactura extends javax.swing.JInternalFrame {
         List<DetalleLogica> miLista = dao.getLista(this.jTFFiltro.getText());
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         miLista.stream().map((DetalleLogica) -> {
-           Object [] fila = new Object [5];
-           fila[0] = DetalleLogica.getIdFactura();
+            Object [] fila = new Object [5];
+            fila[0] = DetalleLogica.getIdFactura();
             fila[1] = DetalleLogica.getIdProducto();
             fila[2] = DetalleLogica.getNombreProducto();
             fila[3] = DetalleLogica.getCantidad();

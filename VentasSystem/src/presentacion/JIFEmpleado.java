@@ -48,7 +48,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         this.jTFNombre.setEnabled(valor);
         this.jTFApellido.setEnabled(valor);
         this.jFTFTelefono.setEnabled(valor);
-        this.jTFDireccion.setEnabled(valor);
+        this.jTADireccion.setEnabled(valor);
         this.jCbosexo.setEnabled(valor);
     }
     
@@ -72,8 +72,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((cl) -> {
-           Object [] fila = new Object [6];
-           fila[0] = cl.getIdempleado();
+            Object [] fila = new Object [6];
+            fila[0] = cl.getIdempleado();
             fila[1] = cl.getNombre();
             fila[2] = cl.getApellido();
             fila[3] = cl.getTelefono();
@@ -89,14 +89,14 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     private void lineaSeleccionada(){
         if (this.jTbMostrar.getSelectedRow() != -1) {
             //Habilito los controles para que se pueda hacer una accion.
-                this.jTFFiltro.setText("");
-                habilitarBotones(false,false,true,true,true);
-                this.jFTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
-                this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
-                this.jTFApellido.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
-                this.jFTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
-                this.jTFDireccion.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
-                this.jCbosexo.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 5)));
+            this.jTFFiltro.setText("");
+            habilitarBotones(false,false,true,true,true);
+            this.jFTFCodigo.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 0)));
+            this.jTFNombre.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 1)));
+            this.jTFApellido.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 2)));
+            this.jFTFTelefono.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 3)));
+            this.jTADireccion.setText(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 4)));
+            this.jCbosexo.setSelectedItem(String.valueOf(this.jTbMostrar.getValueAt(jTbMostrar.getSelectedRow(), 5)));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione el Empleado a Editar");
         }
@@ -108,7 +108,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         this.jTFNombre.setText("");
         this.jTFApellido.setText("");
         this.jFTFTelefono.setText("");
-        this.jTFDireccion.setText("");
+        this.jTADireccion.setText("");
         this.jCbosexo.setSelectedIndex(0);
     }
     
@@ -119,7 +119,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
         cl.setTelefono(this.jFTFTelefono.getText());
-        cl.setDireccion(this.jTFDireccion.getText());
+        cl.setDireccion(this.jTADireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
         
         try{
@@ -152,7 +152,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         cl.setNombre(this.jTFNombre.getText());
         cl.setApellido(this.jTFApellido.getText());
         cl.setTelefono(this.jFTFTelefono.getText());
-        cl.setDireccion(this.jTFDireccion.getText());
+        cl.setDireccion(this.jTADireccion.getText());
         cl.setIdSexo(this.jCbosexo.getSelectedIndex());
         try{
             EmpleadoDao dao = new EmpleadoDao();
@@ -182,13 +182,13 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Ingrese el Telefono del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jFTFTelefono.requestFocus();
             valor = false;
-        }else if ((this.jTFDireccion.getText().length())== 0){
+        }else if ((this.jTADireccion.getText().length())== 0){
             JOptionPane.showMessageDialog(null,"Ingrese la Direccion del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFDireccion.requestFocus();
+            this.jTADireccion.requestFocus();
             valor = false;
         }else if ((this.jCbosexo.getSelectedIndex())== 0 ){
             JOptionPane.showMessageDialog(null,"Seleccione el Sexo del Empleado",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jTFDireccion.requestFocus();
+            this.jTADireccion.requestFocus();
             valor = false;
         }
          return valor;
@@ -219,7 +219,6 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jBtnReportC = new javax.swing.JButton();
         jFTFTelefono = new javax.swing.JFormattedTextField();
-        jTFDireccion = new javax.swing.JTextField();
         jCbosexo = new javax.swing.JComboBox<>();
         jFTFCodigo = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -237,6 +236,8 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         jBtnCancelar = new javax.swing.JButton();
         jBtnActualizar = new javax.swing.JButton();
         jBtnGuardar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTADireccion = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -263,7 +264,6 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         getContentPane().add(jFTFTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 142, -1));
-        getContentPane().add(jTFDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 327, 60));
 
         jCbosexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--" }));
         getContentPane().add(jCbosexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 170, 153, -1));
@@ -364,6 +364,12 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 310, -1, -1));
+
+        jTADireccion.setColumns(20);
+        jTADireccion.setRows(5);
+        jScrollPane2.setViewportView(jTADireccion);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, 360, -1));
 
         jLabel7.setFont(new java.awt.Font("Valken", 0, 36)); // NOI18N
         jLabel7.setText("Gestión Empleado");
@@ -492,8 +498,9 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTADireccion;
     private javax.swing.JTextField jTFApellido;
-    private javax.swing.JTextField jTFDireccion;
     private javax.swing.JTextField jTFFiltro;
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTbMostrar;

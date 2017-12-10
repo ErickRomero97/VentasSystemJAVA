@@ -34,8 +34,8 @@ public class JIFBuscarCliente extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) this.jTbMostrar.getModel();
         
         miLista.stream().map((CLClientes) -> {
-           Object [] fila = new Object [6];
-           fila[0] = CLClientes.getRtnCliente();
+            Object [] fila = new Object [6];
+            fila[0] = CLClientes.getRtnCliente();
             fila[1] = CLClientes.getNombre();
             fila[2] = CLClientes.getApellido();
             fila[3] = CLClientes.getTelefono();
