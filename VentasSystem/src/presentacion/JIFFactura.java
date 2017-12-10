@@ -2,15 +2,24 @@ package presentacion;
 import dao.FacturaDao;
 import logica.FacturaLogica;
 import conexion.Conexion;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class JIFFactura extends javax.swing.JInternalFrame {
     
@@ -260,6 +269,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
+        jBtnReporte = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -313,6 +323,15 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTbMostrar);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 563, 160));
+
+        jBtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
+        jBtnReporte.setText("Reporte");
+        jBtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnReporteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 110, 24));
 
         jLabel9.setText("SubTotal:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 50, 20));
@@ -567,6 +586,57 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private void jBtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReporteActionPerformed
+        try {
+            int resp = JOptionPane.showConfirmDialog(this, "¿Desea Ver El Reporte de la Factura por Contado?", Conexion.nombreapp(), JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION){
+                String path = "";
+                try {
+                    path = getClass().getResource("/reportes/RptFacturaContado.jasper").getPath();
+                    path = URLDecoder.decode(path,"UTF-8");
+                    Connection cn = Conexion.conectar();
+                    Map parametros = new HashMap();  
+
+                    //parametros.put("pIdFactura",Integer.parseInt(id));
+
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+                    JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+                    JasperViewer visor = new JasperViewer(imprimir,false);
+
+                    visor.setTitle("Reporte de Factura");
+                    visor.setExtendedState(MAXIMIZED_BOTH);
+                    visor.setVisible(true);
+            
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+                    }
+            }else{
+                String path = "";
+                try {
+                    path = getClass().getResource("/reportes/RptFacturaCredito.jasper").getPath();
+                    path = URLDecoder.decode(path,"UTF-8");
+                    Connection cn = Conexion.conectar();
+                    Map parametros = new HashMap();  
+
+                    //parametros.put("pIdFactura",Integer.parseInt(id));
+
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+                    JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+                    JasperViewer visor = new JasperViewer(imprimir,false);
+
+                    visor.setTitle("Reporte de Factura");
+                    visor.setExtendedState(MAXIMIZED_BOTH);
+                    visor.setVisible(true);
+            
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+                    }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgregar;
@@ -575,6 +645,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnReporte;
     private javax.swing.JComboBox<String> jCboTipoFactura;
     private javax.swing.JFormattedTextField jFTFFecha;
     private javax.swing.JLabel jLabel1;

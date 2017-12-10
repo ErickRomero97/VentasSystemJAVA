@@ -29,6 +29,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
         initComponents();
         habilitarBotones(true,false,false,false, false);
         llenarTabla();
+        ocultarColumnas();
     }
     
     //Metodo de Obtencion del Correlativo de la Usuario.
@@ -109,7 +110,14 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione el Empleado a Editar");
         }
     }
+    
         
+     private void ocultarColumnas(){
+        //Oculta la columna de IdProveedor
+        jTbMostrar.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTbMostrar.getColumnModel().getColumn(2).setMinWidth(0);
+        jTbMostrar.getColumnModel().getColumn(2).setPreferredWidth(0);
+    }
     private void limpiar(){
         this.jTFIdUsuario.setText("");
         this.jTFNombre.setText("");

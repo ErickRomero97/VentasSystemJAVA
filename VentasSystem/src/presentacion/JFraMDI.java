@@ -15,6 +15,25 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import conexion.Conexion;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 public class JFraMDI extends javax.swing.JFrame {
 
     /**
@@ -57,6 +76,11 @@ public class JFraMDI extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMIProducto = new javax.swing.JMenuItem();
         jMIBuscarProducto = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMIFacturaRContado = new javax.swing.JMenuItem();
+        jMIFacturaRCredito = new javax.swing.JMenuItem();
+        jMIClientesR = new javax.swing.JMenuItem();
+        jMIEmpleadoR = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
@@ -236,6 +260,47 @@ public class JFraMDI extends javax.swing.JFrame {
         jMenu6.add(jMIBuscarProducto);
 
         jMenuBar1.add(jMenu6);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Factura.png"))); // NOI18N
+        jMenu7.setText("Reportes");
+        jMenu7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jMenu7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jMIFacturaRContado.setText("Factura Contado");
+        jMIFacturaRContado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFacturaRContadoActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIFacturaRContado);
+
+        jMIFacturaRCredito.setText("Factura Credito");
+        jMIFacturaRCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFacturaRCreditoActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIFacturaRCredito);
+
+        jMIClientesR.setText("Cliente");
+        jMIClientesR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIClientesRActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIClientesR);
+
+        jMIEmpleadoR.setText("Empleado");
+        jMIEmpleadoR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIEmpleadoRActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIEmpleadoR);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -435,6 +500,98 @@ public class JFraMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMIBuscarProductoActionPerformed
 
+    private void jMIFacturaRContadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaRContadoActionPerformed
+        String path = "";
+                try {
+                    path = getClass().getResource("/reportes/RptFacturaContado.jasper").getPath();
+                    path = URLDecoder.decode(path,"UTF-8");
+                    Connection cn = Conexion.conectar();
+                    Map parametros = new HashMap();  
+
+                    //parametros.put("pIdFactura",Integer.parseInt(id));
+
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+                    JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+                    JasperViewer visor = new JasperViewer(imprimir,false);
+
+                    visor.setTitle("Reporte de Factura");
+                    visor.setExtendedState(MAXIMIZED_BOTH);
+                    visor.setVisible(true);
+            
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+                    }
+    }//GEN-LAST:event_jMIFacturaRContadoActionPerformed
+
+    private void jMIFacturaRCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaRCreditoActionPerformed
+        String path = "";
+        try {
+                    path = getClass().getResource("/reportes/RptFacturaCredito.jasper").getPath();
+                    path = URLDecoder.decode(path,"UTF-8");
+                    Connection cn = Conexion.conectar();
+                    Map parametros = new HashMap();  
+
+                    //parametros.put("pIdFactura",Integer.parseInt(id));
+
+                    JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+                    JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+                    JasperViewer visor = new JasperViewer(imprimir,false);
+
+                    visor.setTitle("Reporte de Factura");
+                    visor.setExtendedState(MAXIMIZED_BOTH);
+                    visor.setVisible(true);
+            
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+                    }        
+    }//GEN-LAST:event_jMIFacturaRCreditoActionPerformed
+
+    private void jMIClientesRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIClientesRActionPerformed
+        String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptCliente.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de los Clientes");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jMIClientesRActionPerformed
+
+    private void jMIEmpleadoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEmpleadoRActionPerformed
+       String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptEmpleado.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de los Clientes");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jMIEmpleadoRActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -481,9 +638,13 @@ public class JFraMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIBusquedaEmpleado;
     private javax.swing.JMenuItem jMIBusquedaUsuarios;
     private javax.swing.JMenuItem jMICliente;
+    private javax.swing.JMenuItem jMIClientesR;
     private javax.swing.JMenuItem jMIDetalleFactura;
+    private javax.swing.JMenuItem jMIEmpleadoR;
     private javax.swing.JMenuItem jMIEmpleados;
     private javax.swing.JMenuItem jMIFactura;
+    private javax.swing.JMenuItem jMIFacturaRContado;
+    private javax.swing.JMenuItem jMIFacturaRCredito;
     private javax.swing.JMenuItem jMIProducto;
     private javax.swing.JMenuItem jMIProveedor;
     private javax.swing.JMenuItem jMIUsuarios;
@@ -493,6 +654,7 @@ public class JFraMDI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -430,6 +430,31 @@ delimiter ;
 call sp_login('any','1234');
 
 
+-- Procedimientos Almacenados de los Reportes
+
+-- Procedimiento de  Mostrar Factura Reporte Contado
+delimiter $$
+create procedure sp_facturareportecontado()
+	begin
+		Select  F.idfactura,C.rtncliente, C.nombre,C.apellido, TF.tipofactura, F.fechafactura 
+             from factura F inner join cliente C on C.rtncliente = F.rtncliente 
+							inner join tipofactura TF on TF.idtipofactura = F.idtipofactura
+			 where TF.idtipofactura =1;
+    end $$
+delimiter ;
+
+-- Procedimiento de  Mostrar Factura Reporte Credito
+delimiter $$
+create procedure sp_facturareportecredito()
+	begin
+		Select  F.idfactura,C.rtncliente, C.nombre,C.apellido, TF.tipofactura, F.fechafactura 
+             from factura F inner join cliente C on C.rtncliente = F.rtncliente 
+							inner join tipofactura TF on TF.idtipofactura = F.idtipofactura
+			 where TF.idtipofactura =2;
+    end $$
+delimiter ;
+
+
 
 
 

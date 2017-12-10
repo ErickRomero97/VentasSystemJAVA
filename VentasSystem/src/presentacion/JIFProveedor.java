@@ -184,7 +184,6 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
     
     //Esta función devuelve los datos una vez seleccionado un registro en la jTable.
     private void filaSeleccionada(){
-        String sexo = "";
         
         if(this.jTblDatosProveedor.getSelectedRow() != -1){
             if(this.jTblDatosProveedor.isEnabled() == true){

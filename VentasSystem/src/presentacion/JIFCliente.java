@@ -3,14 +3,25 @@ package presentacion;
 import dao.ClientesDao;
 import logica.ClientesLogica;
 import conexion.Conexion;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.runtime.Debug.id;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 public class JIFCliente extends javax.swing.JInternalFrame {
 
     public JIFCliente() throws SQLException {
@@ -227,8 +238,9 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
-        jBtnBorrar = new javax.swing.JButton();
+        jBtnReportC = new javax.swing.JButton();
         jTFFiltro = new javax.swing.JTextField();
+        jBtnBorrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTFApellido = new javax.swing.JTextField();
         jTFDireccion = new javax.swing.JTextField();
@@ -279,6 +291,22 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 632, 204));
 
+        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
+        jBtnReportC.setText("Reporte");
+        jBtnReportC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnReportCActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, -1, -1));
+
+        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFFiltroKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, -1));
+
         jBtnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete.png"))); // NOI18N
         jBtnBorrar.setText("Borrar");
         jBtnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,13 +315,6 @@ public class JIFCliente extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBtnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 100, -1));
-
-        jTFFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFFiltroKeyReleased(evt);
-            }
-        });
-        getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 250, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -463,6 +484,30 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         jTFNombre.requestFocus();
     }//GEN-LAST:event_jTbMostrarMousePressed
 
+    private void jBtnReportCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReportCActionPerformed
+        
+        String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptCliente.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de los Clientes");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jBtnReportCActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
@@ -470,6 +515,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnReportC;
     private javax.swing.JComboBox<String> jCbosexo;
     private javax.swing.JFormattedTextField jFTFCodigo;
     private javax.swing.JFormattedTextField jFTFTelefono;

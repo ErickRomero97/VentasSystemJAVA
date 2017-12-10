@@ -2,14 +2,25 @@ package presentacion;
 import dao.EmpleadoDao;
 import logica.EmpleadoLogica;
 import conexion.Conexion;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.runtime.Debug.id;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 public class JIFEmpleado extends javax.swing.JInternalFrame {
 
     /**
@@ -206,6 +217,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
+        jBtnReportC = new javax.swing.JButton();
         jFTFTelefono = new javax.swing.JFormattedTextField();
         jTFDireccion = new javax.swing.JTextField();
         jCbosexo = new javax.swing.JComboBox<>();
@@ -235,6 +247,15 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Código Empleado:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, -1, -1));
+
+        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
+        jBtnReportC.setText("Reporte");
+        jBtnReportC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnReportCActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, -1, -1));
 
         try {
             jFTFTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
@@ -425,12 +446,37 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         jTFNombre.requestFocus();
     }//GEN-LAST:event_jTbMostrarMousePressed
 
+    private void jBtnReportCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReportCActionPerformed
+
+       String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptEmpleado.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de los Empleados");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jBtnReportCActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnActualizar;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnGuardar;
     private javax.swing.JButton jBtnNuevo;
+    private javax.swing.JButton jBtnReportC;
     private javax.swing.JComboBox<String> jCbosexo;
     private javax.swing.JFormattedTextField jFTFCodigo;
     private javax.swing.JFormattedTextField jFTFTelefono;
