@@ -320,17 +320,17 @@ public class JIFProducto extends javax.swing.JInternalFrame {
                 jBtnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 130, -1));
+        getContentPane().add(jBtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 160, -1));
 
         jLabel6.setText("Precio Compra:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 240, -1, -1));
-        getContentPane().add(jTFPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 240, 85, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 240, -1, -1));
+        getContentPane().add(jTFPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 240, 85, -1));
 
         jLabel1.setText("Código Producto:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, -1, -1));
 
         jLabel8.setText("Codigo Proveedor:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, -1, -1));
 
         jTFCodigoProducto.setEditable(false);
         getContentPane().add(jTFCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 70, -1));
@@ -339,17 +339,17 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         getContentPane().add(jTFCodigoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 280, 156, -1));
 
         jLabel2.setText("Nombre del Producto:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, -1, -1));
 
         jLabel9.setText("Nombre proveedor:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, -1, -1));
         getContentPane().add(jTFNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 160, 221, -1));
 
         jTFNombreProveedor.setEditable(false);
         getContentPane().add(jTFNombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 320, 223, -1));
 
         jLabel3.setText("Unidad existencia:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 120, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -366,11 +366,11 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         getContentPane().add(jTFUnidadExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 200, 65, -1));
 
         jLabel12.setText("Existencia mínima:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 200, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 200, -1, -1));
 
         jLabel4.setText("Precio venta:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, -1, -1));
-        getContentPane().add(jTFExistenciaMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 200, 65, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, -1, -1));
+        getContentPane().add(jTFExistenciaMinima, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 200, 65, -1));
         getContentPane().add(jTFPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 240, 70, -1));
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelnew.png"))); // NOI18N
@@ -409,7 +409,7 @@ public class JIFProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wishlist_add.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
         jButton1.setText("Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

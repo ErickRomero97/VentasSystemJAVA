@@ -323,35 +323,35 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 563, 160));
 
-        jBtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
+        jBtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
         jBtnReporte.setText("Reporte");
         jBtnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 110, 24));
+        getContentPane().add(jBtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 110, 24));
 
         jLabel9.setText("SubTotal:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 50, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 80, 20));
 
         jLabel10.setText("Total:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, -1, 20));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 500, -1, 20));
 
         jLabel11.setText("Impuesto:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, -1, 20));
-        getContentPane().add(jTFSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 99, -1));
-        getContentPane().add(jTFIsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 460, 99, -1));
-        getContentPane().add(jTFTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 490, 99, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, -1, 20));
+        getContentPane().add(jTFSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 99, -1));
+        getContentPane().add(jTFIsv, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 470, 99, -1));
+        getContentPane().add(jTFTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 99, -1));
 
         jLabel2.setText("Cliente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
 
         jLabel3.setText("Tipo Factura:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, 20));
 
         jLabel4.setText("Fecha:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 20));
         getContentPane().add(jTFCodigoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 80, -1));
         getContentPane().add(jTFCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 140, -1));
 
@@ -376,13 +376,13 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         getContentPane().add(jFTFFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 153, -1));
 
         jLabel1.setText("Código:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, 20));
 
         jLabel7.setText("Cantidad:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, 20));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 20));
 
         jLabel8.setText("Precio:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, 20));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 20));
         getContentPane().add(jTFCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 68, -1));
         getContentPane().add(jTFPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 68, -1));
 
@@ -405,7 +405,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         getContentPane().add(jBtnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 20, 20));
 
         jLabel6.setText("Código Producto:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 90, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 20));
         getContentPane().add(jTFCodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 90, -1));
 
         jBtnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
@@ -415,7 +415,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                 jBtnNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 90, 24));
+        getContentPane().add(jBtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 90, 24));
 
         jBtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/disk.png"))); // NOI18N
         jBtnGuardar.setText("Guardar");
@@ -424,7 +424,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                 jBtnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
+        getContentPane().add(jBtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, -1, -1));
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelnew.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
@@ -433,7 +433,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
                 jBtnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, -1, -1));
+        getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Valken", 0, 36)); // NOI18N
         jLabel14.setText("Gestión Factura");

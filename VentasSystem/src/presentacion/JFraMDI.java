@@ -6,15 +6,8 @@
 package presentacion;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import conexion.Conexion;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.net.URLDecoder;
@@ -77,12 +70,12 @@ public class JFraMDI extends javax.swing.JFrame {
         jMIProducto = new javax.swing.JMenuItem();
         jMIBuscarProducto = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        jMIFacturaRContado = new javax.swing.JMenuItem();
-        jMIFacturaRCredito = new javax.swing.JMenuItem();
-        jMIClientesR = new javax.swing.JMenuItem();
-        jMIEmpleadoR = new javax.swing.JMenuItem();
-        jMIProveedorReporte = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMIFacturaReporteContado = new javax.swing.JMenuItem();
+        jMIFacturaReporteCredito = new javax.swing.JMenuItem();
+        jMIClientesReporte = new javax.swing.JMenuItem();
+        jMIEmpleadoReporte = new javax.swing.JMenuItem();
+        jMIProductoReporte = new javax.swing.JMenuItem();
+        jMIProveedorReporte = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
@@ -263,62 +256,60 @@ public class JFraMDI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Factura.png"))); // NOI18N
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reportes.png"))); // NOI18N
         jMenu7.setText("Reportes");
         jMenu7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jMenu7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jMIFacturaRContado.setText("Factura Contado");
-        jMIFacturaRContado.addActionListener(new java.awt.event.ActionListener() {
+        jMIFacturaReporteContado.setText("Reporte Factura Contado");
+        jMIFacturaReporteContado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIFacturaRContadoActionPerformed(evt);
+                jMIFacturaReporteContadoActionPerformed(evt);
             }
         });
-        jMenu7.add(jMIFacturaRContado);
+        jMenu7.add(jMIFacturaReporteContado);
 
-        jMIFacturaRCredito.setText("Factura Credito");
-        jMIFacturaRCredito.addActionListener(new java.awt.event.ActionListener() {
+        jMIFacturaReporteCredito.setText("Reporte Factura Credito");
+        jMIFacturaReporteCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIFacturaRCreditoActionPerformed(evt);
+                jMIFacturaReporteCreditoActionPerformed(evt);
             }
         });
-        jMenu7.add(jMIFacturaRCredito);
+        jMenu7.add(jMIFacturaReporteCredito);
 
-        jMIClientesR.setText("Cliente");
-        jMIClientesR.addActionListener(new java.awt.event.ActionListener() {
+        jMIClientesReporte.setText("Reporte Cliente");
+        jMIClientesReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIClientesRActionPerformed(evt);
+                jMIClientesReporteActionPerformed(evt);
             }
         });
-        jMenu7.add(jMIClientesR);
+        jMenu7.add(jMIClientesReporte);
 
-        jMIEmpleadoR.setText("Empleado");
-        jMIEmpleadoR.addActionListener(new java.awt.event.ActionListener() {
+        jMIEmpleadoReporte.setText("Reporte Empleado");
+        jMIEmpleadoReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIEmpleadoRActionPerformed(evt);
+                jMIEmpleadoReporteActionPerformed(evt);
             }
         });
-        jMenu7.add(jMIEmpleadoR);
+        jMenu7.add(jMIEmpleadoReporte);
 
-        jMIProveedorReporte.setSelected(true);
-        jMIProveedorReporte.setText("Producto");
+        jMIProductoReporte.setText("Reporte Producto");
+        jMIProductoReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIProductoReporteActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMIProductoReporte);
+
+        jMIProveedorReporte.setText("Reporte Proveedor");
         jMIProveedorReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMIProveedorReporteActionPerformed(evt);
             }
         });
         jMenu7.add(jMIProveedorReporte);
-
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText("Proveedor");
-        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jCheckBoxMenuItem2);
 
         jMenuBar1.add(jMenu7);
 
@@ -520,7 +511,7 @@ public class JFraMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMIBuscarProductoActionPerformed
 
-    private void jMIFacturaRContadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaRContadoActionPerformed
+    private void jMIFacturaReporteContadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaReporteContadoActionPerformed
         String path = "";
         
         try {
@@ -542,9 +533,9 @@ public class JFraMDI extends javax.swing.JFrame {
          } catch (Exception e) {
              JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
          }
-    }//GEN-LAST:event_jMIFacturaRContadoActionPerformed
+    }//GEN-LAST:event_jMIFacturaReporteContadoActionPerformed
 
-    private void jMIFacturaRCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaRCreditoActionPerformed
+    private void jMIFacturaReporteCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFacturaReporteCreditoActionPerformed
         String path = "";
         try {
             path = getClass().getResource("/reportes/RptFacturaCredito.jasper").getPath();
@@ -565,9 +556,9 @@ public class JFraMDI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
         }        
-    }//GEN-LAST:event_jMIFacturaRCreditoActionPerformed
+    }//GEN-LAST:event_jMIFacturaReporteCreditoActionPerformed
 
-    private void jMIClientesRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIClientesRActionPerformed
+    private void jMIClientesReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIClientesReporteActionPerformed
         String path = "";
         try {
             path = getClass().getResource("/reportes/RptCliente.jasper").getPath();
@@ -588,9 +579,9 @@ public class JFraMDI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
         }
-    }//GEN-LAST:event_jMIClientesRActionPerformed
+    }//GEN-LAST:event_jMIClientesReporteActionPerformed
 
-    private void jMIEmpleadoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEmpleadoRActionPerformed
+    private void jMIEmpleadoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEmpleadoReporteActionPerformed
        String path = "";
         try {
             path = getClass().getResource("/reportes/RptEmpleado.jasper").getPath();
@@ -611,9 +602,33 @@ public class JFraMDI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
         }
-    }//GEN-LAST:event_jMIEmpleadoRActionPerformed
+    }//GEN-LAST:event_jMIEmpleadoReporteActionPerformed
 
-    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+    private void jMIProductoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProductoReporteActionPerformed
+         String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptProducto.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();  
+            
+            //parametros.put("pIdFactura",Integer.parseInt(id));
+         
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+          
+            visor.setTitle("Reporte General de Producto");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+        
+    }//GEN-LAST:event_jMIProductoReporteActionPerformed
+
+    private void jMIProveedorReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProveedorReporteActionPerformed
         String path = "";
         try {
             path = getClass().getResource("/reportes/RptProveedor.jasper").getPath();
@@ -628,29 +643,6 @@ public class JFraMDI extends javax.swing.JFrame {
             JasperViewer visor = new JasperViewer(imprimir,false);
           
             visor.setTitle("Reporte General de Proveedor");
-            visor.setExtendedState(MAXIMIZED_BOTH);
-            visor.setVisible(true);
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
-        }
-    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
-
-    private void jMIProveedorReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIProveedorReporteActionPerformed
-        String path = "";
-        try {
-            path = getClass().getResource("/reportes/RptProducto.jasper").getPath();
-            path = URLDecoder.decode(path,"UTF-8");
-            Connection cn = Conexion.conectar();
-            Map parametros = new HashMap();  
-            
-            //parametros.put("pIdFactura",Integer.parseInt(id));
-         
-            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
-            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
-            JasperViewer visor = new JasperViewer(imprimir,false);
-          
-            visor.setTitle("Reporte General de Producto");
             visor.setExtendedState(MAXIMIZED_BOTH);
             visor.setVisible(true);
             
@@ -695,7 +687,6 @@ public class JFraMDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -706,16 +697,17 @@ public class JFraMDI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIBusquedaEmpleado;
     private javax.swing.JMenuItem jMIBusquedaUsuarios;
     private javax.swing.JMenuItem jMICliente;
-    private javax.swing.JMenuItem jMIClientesR;
+    private javax.swing.JMenuItem jMIClientesReporte;
     private javax.swing.JMenuItem jMIDetalleFactura;
-    private javax.swing.JMenuItem jMIEmpleadoR;
+    private javax.swing.JMenuItem jMIEmpleadoReporte;
     private javax.swing.JMenuItem jMIEmpleados;
     private javax.swing.JMenuItem jMIFactura;
-    private javax.swing.JMenuItem jMIFacturaRContado;
-    private javax.swing.JMenuItem jMIFacturaRCredito;
+    private javax.swing.JMenuItem jMIFacturaReporteContado;
+    private javax.swing.JMenuItem jMIFacturaReporteCredito;
     private javax.swing.JMenuItem jMIProducto;
+    private javax.swing.JMenuItem jMIProductoReporte;
     private javax.swing.JMenuItem jMIProveedor;
-    private javax.swing.JCheckBoxMenuItem jMIProveedorReporte;
+    private javax.swing.JMenuItem jMIProveedorReporte;
     private javax.swing.JMenuItem jMIUsuarios;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

@@ -309,7 +309,7 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, 263, -1));
 
         jLabel1.setText("Código Proveedor:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, 20));
 
         try {
             jFFCodigoProveedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-#####")));
@@ -319,13 +319,13 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         getContentPane().add(jFFCodigoProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 226, -1));
 
         jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, -1, 20));
 
         jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--" }));
         getContentPane().add(jCboSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 125, -1));
 
         jLabel3.setText("Apellido:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 170, -1, 20));
 
         jBtnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
         jBtnNuevo.setText("Nuevo");
@@ -363,7 +363,7 @@ public class JIFProveedor extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 400, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wishlist_add.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
         jButton1.setText("Reporte");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

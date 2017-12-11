@@ -291,7 +291,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 632, 204));
 
-        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wishlist_add.png"))); // NOI18N
+        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
         jBtnReportC.setText("Reporte");
         jBtnReportC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +314,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
                 jBtnBorrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 130, -1));
+        getContentPane().add(jBtnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -323,7 +323,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jTFApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 130, 139, -1));
 
         jLabel8.setText("RTN Cliente:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
 
         jLabel1.setText("Sexo:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, -1, -1));
@@ -333,7 +333,7 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 128, -1));
 
         jLabel9.setText("Nombre:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, -1, -1));
 
         jCbosexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         getContentPane().add(jCbosexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 170, 139, -1));
@@ -395,10 +395,10 @@ public class JIFCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 210, 340, -1));
 
         jLabel11.setText("Telefono:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, -1, -1));
 
         jLabel10.setText("Apellido:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Valken", 0, 36)); // NOI18N
         jLabel7.setText("Gestión Cliente");

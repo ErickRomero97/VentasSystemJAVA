@@ -247,16 +247,16 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setText("Código Empleado:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, -1, 20));
 
-        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/addnew.png"))); // NOI18N
+        jBtnReportC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
         jBtnReportC.setText("Reporte");
         jBtnReportC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnReportCActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 350, -1, -1));
+        getContentPane().add(jBtnReportC, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
 
         try {
             jFTFTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
@@ -276,10 +276,10 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         getContentPane().add(jFTFCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 169, -1));
 
         jLabel9.setText("Nombre:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
 
         jLabel10.setText("Apellido:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 140, -1, -1));
         getContentPane().add(jTFNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 142, -1));
 
         jLabel12.setText("Dirección:");
@@ -290,7 +290,7 @@ public class JIFEmpleado extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 180, -1, -1));
 
         jLabel11.setText("Telefono:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
