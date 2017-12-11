@@ -78,13 +78,13 @@ public class JFraLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jTFUsuario = new javax.swing.JTextField();
         jBtnIngresar = new javax.swing.JButton();
         jBtnCanselar = new javax.swing.JButton();
         jPFContrasena = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -94,15 +94,6 @@ public class JFraLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Source Sans Pro Black", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 255, 255));
-        jLabel1.setText("Iniciar Sesión");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 160, 40));
-
-        jLabel2.setFont(new java.awt.Font("Source Sans Pro Black", 0, 18)); // NOI18N
-        jLabel2.setText("Contraseña:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
         getContentPane().add(jTFUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 270, 30));
 
         jBtnIngresar.setText("Ingresar");
@@ -122,9 +113,18 @@ public class JFraLogin extends javax.swing.JFrame {
         getContentPane().add(jBtnCanselar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 100, 30));
         getContentPane().add(jPFContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 270, 30));
 
-        jLabel3.setFont(new java.awt.Font("Source Sans Pro Black", 0, 18)); // NOI18N
-        jLabel3.setText("Usuario:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 20));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(13, 234, 234));
+        jLabel2.setText("INICIO DE SESIÓN");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Contraseña:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Nombre de Usuario:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login/logo.png"))); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 220, 130));
@@ -198,9 +198,9 @@ public class JFraLogin extends javax.swing.JFrame {
     private javax.swing.JButton jBtnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
