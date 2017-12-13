@@ -29,6 +29,10 @@ from proveedor]]>
 				</textElement>
 				<text><![CDATA[Reporte General de Proveedor]]></text>
 			</staticText>
+			<image>
+				<reportElement x="25" y="20" width="79" height="59" uuid="90b3e772-553d-42df-8ed6-b45ebd00edec"/>
+				<imageExpression><![CDATA["C:\\Users\\Walter\\Desktop\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

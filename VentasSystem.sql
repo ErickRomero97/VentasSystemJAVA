@@ -454,6 +454,22 @@ create procedure sp_facturareportecredito()
     end $$
 delimiter ;
 
+delimiter $$
+create procedure sp_facturaId(in pidfactura int)
+	begin
+		Select  F.idfactura,F.fechafactura,tf.tipofactura,c.rtncliente,concat(c.nombre,' ',c.apellido) as 'Nombre Cliente',p.idproducto,p.nombreproducto,df.cantidad,df.precioventa 
+        ,df.precioventa * df.cantidad as 'Subtotal',sum(df.precioventa * df.cantidad) as 'SubtotalFinal',((sum(df.precioventa * df.cantidad))*0.15) as 'ISV',((sum(df.precioventa * df.cantidad))+((sum(df.precioventa * df.cantidad))*0.15)) as 'Total'
+		from factura F inner join detallefactura df on F.idfactura=df.idfactura
+					   inner join producto p on df.idproducto=p.idproducto
+					   inner join tipofactura tf on F.idtipofactura=tf.idtipofactura
+                       inner join cliente c on F.rtncliente=c.rtncliente
+		Where F.idfactura= pidfactura
+        group by F.idfactura,F.fechafactura,tf.tipofactura,c.rtncliente,c.nombre,c.apellido,p.idproducto,p.nombreproducto,df.cantidad,df.precioventa,'SubtotalFinal';
+    end $$
+delimiter ;
+
+call sp_facturaId(2)
+
 
 
 

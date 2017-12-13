@@ -1,13 +1,25 @@
 package presentacion;
+import conexion.Conexion;
 import dao.FacturaDao;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.net.URLDecoder;
+import java.sql.Connection;
 import logica.FacturaLogica;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 public class JIFBuscarFactura extends javax.swing.JInternalFrame {
-
+    public static int cod ;
     public JIFBuscarFactura() throws SQLException {
         initComponents();
         llenarTabla();
@@ -35,7 +47,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
             fila[2] = FacturaLogica.getNombreCliente();
             fila[3] = FacturaLogica.getApellidoCliente();
             fila[4] = FacturaLogica.getTipoSFactura();
-            fila[5] = FacturaLogica.getFechaFactura();
+            fila[5] = FacturaLogica.getFechafactura();
             return fila;
         }).forEachOrdered((fila) -> {
             tabla.addRow(fila);
@@ -53,6 +65,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTbMostrar = new javax.swing.JTable();
         jTFFiltro = new javax.swing.JTextField();
+        jBtnR = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,6 +91,19 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTbMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTbMostrarMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTbMostrarMouseReleased(evt);
+            }
+        });
+        jTbMostrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTbMostrarKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTbMostrar);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 690, 210));
@@ -88,6 +114,15 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTFFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 288, -1));
+
+        jBtnR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
+        jBtnR.setText("Reporte Cod Factura");
+        jBtnR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBtnR, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/zoom.png"))); // NOI18N
@@ -105,7 +140,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 300, 330));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 360));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,7 +153,57 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
             Logger.getLogger(JIFCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTFFiltroKeyReleased
-    
+
+    private void jBtnRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRActionPerformed
+        String path = "";
+        try {
+            path = getClass().getResource("/reportes/RptFacturaId.jasper").getPath();
+            path = URLDecoder.decode(path,"UTF-8");
+            Connection cn = Conexion.conectar();
+            Map parametros = new HashMap();
+            
+
+            parametros.put("cod",cod);
+
+            JasperReport reporte = (JasperReport)JRLoader.loadObject(path);
+            JasperPrint imprimir = JasperFillManager.fillReport(reporte,parametros,cn);
+            JasperViewer visor = new JasperViewer(imprimir,false);
+            
+
+            visor.setTitle("Reporte de Factura");
+            visor.setExtendedState(MAXIMIZED_BOTH);
+            visor.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al Mostrar el reporte: "+e.getMessage());
+        }
+    }//GEN-LAST:event_jBtnRActionPerformed
+
+    private void jTbMostrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbMostrarKeyPressed
+      
+    }//GEN-LAST:event_jTbMostrarKeyPressed
+
+    private void jTbMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMouseClicked
+        try {
+            filaSeleccionada();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFBuscarFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTbMostrarMouseClicked
+
+    private void jTbMostrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTbMostrarMouseReleased
+         try {
+            filaSeleccionada();
+        } catch (SQLException ex) {
+            Logger.getLogger(JIFBuscarFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTbMostrarMouseReleased
+    private void filaSeleccionada() throws SQLException{
+        if (this.jTbMostrar.getSelectedRow() != -1){
+        cod = Integer.parseInt(String.valueOf(this.jTbMostrar.getValueAt(this.jTbMostrar.getSelectedRow(), 0)));
+       
+        }
+    }    
     //Metodo principal Main.
     public static void main(String args[]){
         java.awt.EventQueue.invokeLater(() -> {
@@ -131,6 +216,7 @@ public class JIFBuscarFactura extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

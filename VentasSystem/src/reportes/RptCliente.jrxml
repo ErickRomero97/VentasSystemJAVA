@@ -36,6 +36,10 @@
 				</textElement>
 				<text><![CDATA[Reporte General de los Clientes VentasSystem]]></text>
 			</staticText>
+			<image>
+				<reportElement x="34" y="14" width="79" height="59" uuid="cd7a24d1-3810-4134-b2ea-e556bd0254b3"/>
+				<imageExpression><![CDATA["C:\\Users\\Walter\\Desktop\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

@@ -28,7 +28,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 public class JFraMDI extends javax.swing.JFrame {
-
+public static int idUsuario;
     /**
      * Creates new form JFraMDI
      */

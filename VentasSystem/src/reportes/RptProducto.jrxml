@@ -40,6 +40,10 @@ From Producto]]>
 				</textElement>
 				<text><![CDATA[Reporte General de Productos]]></text>
 			</staticText>
+			<image>
+				<reportElement x="44" y="20" width="79" height="59" uuid="1edd626e-3b7b-4393-b182-8d61a657ebc2"/>
+				<imageExpression><![CDATA["C:\\Users\\Walter\\Desktop\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

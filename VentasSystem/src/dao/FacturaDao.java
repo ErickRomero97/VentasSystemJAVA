@@ -26,7 +26,7 @@ public class FacturaDao {
         String sql = "Insert into factura (fechafactura,idtipofactura,rtncliente,idusuario) "
         + "values (?,?,?,?)";
         PreparedStatement st = (PreparedStatement) this.con.prepareStatement(sql);
-        st.setString(1, c1.getFechaFactura());
+        st.setDate(1, c1.getFechafactura() );
         st.setInt(2, c1.getIdTipoFactura());     
         st.setString(3, c1.getRtnCliente());
         st.setInt(4,c1.getIdUsuario());
@@ -110,7 +110,7 @@ public class FacturaDao {
                 c1.setNombreCliente(rs.getString("nombre"));
                 c1.setApellidoCliente(rs.getString("apellido"));
                 c1.setTipoSFactura(rs.getString("tipofactura"));
-                c1.setFechaFactura(rs.getString("fechafactura"));
+                c1.setFechafactura(rs.getDate("fechafactura"));
                 miLista.add(c1);
             }rs.close();
         } 

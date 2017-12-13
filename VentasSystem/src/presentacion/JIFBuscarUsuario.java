@@ -23,6 +23,7 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
      */
     public JIFBuscarUsuario() throws SQLException{
         initComponents();
+        ocultarColumnas();
     }
 
     
@@ -33,6 +34,14 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
         while (temp.getRowCount() > 0) {
             temp.removeRow(0);
         }
+    }
+    
+    //metodo de ocultar la columna de la contraseña del usuario.
+    private void ocultarColumnas(){
+        //Oculta la columna de Contraseña
+        jTbMostrar.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTbMostrar.getColumnModel().getColumn(2).setMinWidth(0);
+        jTbMostrar.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
 //Esta función sire para cargar el jTable de los datos de busqueda de proveedor
     private void llenarTabla() throws SQLException{
@@ -103,7 +112,7 @@ public class JIFBuscarUsuario extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "IdUsuario", "Usuario", "Passwork", "Estado", "NombreEmpleado"
+                "IdUsuario", "Usuario", "Password", "Estado", "NombreEmpleado"
             }
         ));
         jScrollPane1.setViewportView(jTbMostrar);

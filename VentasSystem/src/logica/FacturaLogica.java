@@ -1,5 +1,7 @@
 package logica;
 
+import java.sql.Date;
+
 /**
  *
  * @author Walter
@@ -7,11 +9,20 @@ package logica;
 public class FacturaLogica {
     
     //Declaración de los Miembres get and set de la Relación Factura.
-    private String fechaFactura, rtnCliente,tipoSFactura;
+    private String rtnCliente,tipoSFactura;
     private int idFactura,idProducto,idTipoFactura,idUsuario;
     private double precio,cantidad;
     private String nombreProducto;
     private String nombreCliente,apellidoCliente;
+
+    public Date getFechafactura() {
+        return fechafactura;
+    }
+
+    public void setFechafactura(Date fechafactura) {
+        this.fechafactura = fechafactura;
+    }
+    private Date fechafactura;
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -38,14 +49,7 @@ public class FacturaLogica {
     }
    
     
-    public String getFechaFactura() {
-        return fechaFactura;
-    }
-
-    public void setFechaFactura(String fechaFactura) {
-        this.fechaFactura = fechaFactura;
-    }
-
+    
     public String getRtnCliente() {
         return rtnCliente;
     }

@@ -112,7 +112,7 @@ public class JIFUsuario extends javax.swing.JInternalFrame {
     }
     
         
-     private void ocultarColumnas(){
+    private void ocultarColumnas(){
         //Oculta la columna de Contraseña
         jTbMostrar.getColumnModel().getColumn(2).setMaxWidth(0);
         jTbMostrar.getColumnModel().getColumn(2).setMinWidth(0);

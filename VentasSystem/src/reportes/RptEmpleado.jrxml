@@ -1,29 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6bc3d1e1-607d-4760-8862-cf0e5b19e2b7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[{call sp_listarempleado()}]]>
+	</queryString>
+	<field name="idempleado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="83" y="37" width="398" height="20" uuid="2ce322aa-3fdb-449d-92af-1c65a98e3cd6"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte General de los Empleados VentasSystem]]></text>
+			</staticText>
+			<image>
+				<reportElement x="-10" y="20" width="79" height="59" uuid="c98d0923-8d58-4090-a7d6-dd4bb9e40921"/>
+				<imageExpression><![CDATA["C:\\Users\\Walter\\Desktop\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="34" width="555" height="1" uuid="0b50d379-16e5-4f43-a193-d395ce63411d"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="3" y="36" width="555" height="1" uuid="ad4372cb-b14d-4a52-9036-1f6b2ecee7ce"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="2" width="100" height="20" uuid="32d3d716-1c45-4f95-9edd-2292535e1945"/>
+				<text><![CDATA[idempleado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="2" width="100" height="20" uuid="233b1c51-86f7-40fc-87b1-3a516cd6abbe"/>
+				<text><![CDATA[nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="2" width="100" height="20" uuid="9ec06b4b-1edd-4b2f-85b5-857e6004becf"/>
+				<text><![CDATA[apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="2" width="100" height="20" uuid="ad3e5740-b18c-406b-bcab-bc29b8712bb3"/>
+				<text><![CDATA[telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="2" width="100" height="20" uuid="81b4b6d8-6408-4c09-9a9e-8aca8e4ed68a"/>
+				<text><![CDATA[direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="509" y="2" width="100" height="20" uuid="2daa6cdd-7622-465e-9f4e-f99622792880"/>
+				<text><![CDATA[sexo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<line>
+				<reportElement x="3" y="48" width="555" height="1" uuid="6ad07962-528a-4abe-8852-6f0fb56b504e"/>
+			</line>
+			<textField>
+				<reportElement x="2" y="9" width="100" height="20" uuid="98c09f86-c176-41cc-a58a-762c23418c6f"/>
+				<textFieldExpression><![CDATA[$F{idempleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="9" width="100" height="20" uuid="539deab5-e7eb-4dbb-bb2c-b1e5fde120c2"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="15" width="100" height="20" uuid="512f31cd-6178-4f63-8dab-cd811d4290b6"/>
+				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="305" y="17" width="100" height="20" uuid="9216ee0b-8498-415b-b657-8d0586d11296"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="21" width="100" height="20" uuid="3dfa4910-df88-4916-94ae-e19de6555c61"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="509" y="27" width="100" height="20" uuid="90fa2c1b-da5d-4bdd-a5d7-0158b1746f88"/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
 </jasperReport>

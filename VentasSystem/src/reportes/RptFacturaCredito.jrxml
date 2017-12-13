@@ -30,12 +30,16 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="73" y="27" width="398" height="20" uuid="8244a6cf-7f4d-42d5-8a15-e8f11a3d47ea"/>
+				<reportElement x="106" y="33" width="398" height="20" uuid="8244a6cf-7f4d-42d5-8a15-e8f11a3d47ea"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte General de Facturas al Credito VentasSystem]]></text>
 			</staticText>
+			<image>
+				<reportElement x="16" y="20" width="79" height="59" uuid="34062abe-fde5-41eb-abd0-2a59fe3fbaf3"/>
+				<imageExpression><![CDATA["C:\\Users\\Walter\\Desktop\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

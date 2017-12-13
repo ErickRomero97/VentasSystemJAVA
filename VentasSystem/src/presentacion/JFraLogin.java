@@ -39,7 +39,9 @@ public class JFraLogin extends javax.swing.JFrame {
                 try{
                    
                     JFraMDI a = new JFraMDI();             
+                    a.idUsuario = cod;
                     a.show();
+                    
                     
                     this.dispose();
                 }catch (Exception e) {

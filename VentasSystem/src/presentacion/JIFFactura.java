@@ -5,9 +5,11 @@ import conexion.Conexion;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.net.URLDecoder;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     private void limpiar(){
         this.jTFCodigoFactura.setText("");
         this.jTFCliente.setText("");
-        this.jFTFFecha.setText("");
         this.jCboTipoFactura.setSelectedIndex(0);
         this.jTFSubtotal.setText("");
         this.jTFIsv.setText("");
@@ -103,7 +104,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         this.jTFCodigoFactura.setEnabled(valor);
         this.jTFCliente.setEnabled(valor);
         this.jCboTipoFactura.setEnabled(valor);
-        this.jFTFFecha.setEnabled(valor);
         this.jTFCodigoProducto.setEnabled(valor);
         this.jTFCantidad.setEnabled(valor);
         this.jTFPrecio.setEnabled(valor);
@@ -118,10 +118,12 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     //Metodo de Inserción de Datos en la Relacion Factura.
     private void guardarFactura(){
         FacturaLogica cl = new FacturaLogica();
-        cl.setFechaFactura(this.jFTFFecha.getText()); 
+        java.util.Date date = Calendar.getInstance().getTime();
+        java.sql.Date fecha = new java.sql.Date(date.getTime()); 
+        cl.setFechafactura(fecha);
         cl.setIdTipoFactura(this.jCboTipoFactura.getSelectedIndex());
         cl.setRtnCliente(this.jTFCliente.getText());
-        cl.setIdUsuario(2);
+        cl.setIdUsuario(JFraMDI.idUsuario);
         try{
             FacturaDao dao = new FacturaDao();
             dao.insertarFactura(cl);
@@ -191,11 +193,7 @@ public class JIFFactura extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Seleccione el tipo de factura",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
             this.jCboTipoFactura.requestFocus();
             bien = false;
-        }else if (this.jFTFFecha.getText().length()==0 && bien == true){
-            JOptionPane.showMessageDialog(null,"Ingrese la Fecha de la Factura",Conexion.nombreapp(),JOptionPane.INFORMATION_MESSAGE);
-            this.jFTFFecha.requestFocus();
-            bien = false;
-        } 
+        }
         return bien;
     }
     
@@ -277,12 +275,10 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         jTFTotal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jTFCodigoFactura = new javax.swing.JTextField();
         jTFCliente = new javax.swing.JTextField();
         jBtnBuscarCliente = new javax.swing.JButton();
         jCboTipoFactura = new javax.swing.JComboBox<>();
-        jFTFFecha = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -324,13 +320,13 @@ public class JIFFactura extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 563, 160));
 
         jBtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chart_bar_add.png"))); // NOI18N
-        jBtnReporte.setText("Reporte");
+        jBtnReporte.setText("Reporte General");
         jBtnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(jBtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 110, 24));
+        getContentPane().add(jBtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, 140, 24));
 
         jLabel9.setText("SubTotal:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 80, 20));
@@ -349,9 +345,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Tipo Factura:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, 20));
-
-        jLabel4.setText("Fecha:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, 20));
         getContentPane().add(jTFCodigoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 80, -1));
         getContentPane().add(jTFCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 140, -1));
 
@@ -367,13 +360,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
 
         jCboTipoFactura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         getContentPane().add(jCboTipoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 150, -1));
-
-        try {
-            jFTFFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        getContentPane().add(jFTFFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 153, -1));
 
         jLabel1.setText("Código:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, 20));
@@ -646,7 +632,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBtnNuevo;
     private javax.swing.JButton jBtnReporte;
     private javax.swing.JComboBox<String> jCboTipoFactura;
-    private javax.swing.JFormattedTextField jFTFFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -655,7 +640,6 @@ public class JIFFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

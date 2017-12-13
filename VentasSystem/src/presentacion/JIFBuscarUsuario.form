@@ -69,7 +69,7 @@
               <Table columnCount="5" rowCount="4">
                 <Column editable="true" title="IdUsuario" type="java.lang.Object"/>
                 <Column editable="true" title="Usuario" type="java.lang.Object"/>
-                <Column editable="true" title="Passwork" type="java.lang.Object"/>
+                <Column editable="true" title="Password" type="java.lang.Object"/>
                 <Column editable="true" title="Estado" type="java.lang.Object"/>
                 <Column editable="true" title="NombreEmpleado" type="java.lang.Object"/>
               </Table>
